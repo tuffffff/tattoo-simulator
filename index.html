@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilly – Tattoo Simulator</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- MediaPipe Bibliotheken für Face Tracking -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+
+<!---------------NAVIGATION-------------------->
+<nav>
+    <a class="menu menu-hexelil">hexelil.sticht</a>
+    <a href="https://www.instagram.com/hexelil.sticht/" class="menu menu-booking">booking</a>
+    <a href="#about" class="menu menu-about">about</a>
+    <a href="#camera" id="nav-camera" class="menu menu-camera">camera</a>
+    <a href="#imprint" class="menu menu-imprint">imprint</a> 
+</nav>
+
+
+
+<!---------------POPUP-------------------->
+
+<div id="about" class="popup popup-about">
+    <!-- WICHTIG: href="#close" hebt das :target von #about auf -->
+    <a href="#close" class="close">⭑</a>
+    
+    <p>
+        hexelil is a tattoo artist based in Bremen, Germany. Her tattoo style is based in her illustration and drawing practice, which is reflected in her tattoo work. She is interested in creating tattoos that are unique and personal to each client. Her freehand tattoos are.
+    </p> 
+</div>
+
+
+<!-----------pop-up imprint-->
+<div id="imprint" class="popup popup-imprint">
+     <!---close button-->
+    <a href="#close" class="close">⭑</a>
+    <p>
+        Lilly Günther, Neuer  markt 14, h3xelil13@gmail.com
+    </p>
+</div>
+
+
+
+<!---------------KAMERA-------------------->
+
+<!-- Video Element für das Live-Kamerabild -->
+    <video id="webcam" autoplay playsinline class="camera-feed"></video>
+
+<!-- Overlay-Canvas für das gewählte Tattoo auf Gesicht -->
+    <canvas id="tattoo-overlay" class="camera-feed"></canvas>
+
+
+
+<!---------------KAMERA HINTBOX-------------------->
+
+<div id="cam-hint" class="hint-box">
+    hover or click camera to start the tattoo simulator
+</div>
+
+
+<!---------------GALERIE SIDEBAR-------------------->
+
+<aside class="gallery-sidebar">
+        <div id="tattoo-canvas" class="sidebar-feed">
+            <!-- Hier werden die 91 Flashes per JS geladen -->
+        </div>
+</aside>
+
+
+
+
+
+<!---------------EINBETUUNG JS-------------------->
+    <script src="script.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+/*------------------------------SCHRIFTEN EINBETTEM---------------------------*/
+
+
+/* regular (Normal) */
+@font-face {
+    font-family: 'Sigoil';
+    src: url('fonts/web/Sligoil-Micro.woff') format('woff'),
+         url('fonts/web/Sligoil-Micro.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* medium  */
+@font-face {
+    font-family: 'SigoilMedium';
+    src: url('fonts/web/Sligoil-MicroMedium.woff2') format('woff2'),
+         url('fonts/web/Sligoil-MicroMedium.woff') format('woff');
+    font-weight: 500;    /* 500 steht für Medium (400 wäre Regular) */
+    font-style: normal;  /* MUSS 'normal' sein (oder 'italic') */
+}
+
+
+/*------------------------------BODY---------------------------*/
+
+
+/* Body definieren (kein scrollen möglich) */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'SaffronMonoItalic', sans-serif;
+    background-color: #ffffff;
+}
+
+
+/*------------------------------GALLERY SIDEBAR---------------------------*/
+
+
+/* Sidebar rechts – tattoos zum scrollen  */
+.gallery-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;            /* Schmale Galerie wie im Screenshot */
+    height: 100vh;           /* Gesamte Bildschirmhöhe */
+    overflow-y: scroll;      /* Aktiviert das vertikale Scrollen */
+    z-index: 15;             /* Liegt VOR dem Hintergrund */
+    box-sizing: border-box;
+}
+
+
+/* Versteckt die unschöne Scrollbar-Leiste (funktioniert super in Chrome/Safari/Firefox) */
+.gallery-sidebar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* nicht nach rechts scrollbar */
+.gallery-sidebar {
+    scrollbar-width: none;
+}
+
+/* anrichten pngs in der sidebar */
+.sidebar-feed {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-feed img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /*padding: 20px;*/ 
+    box-sizing: border-box;
+    cursor: pointer;
+    
+    /* transition backhround.color */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+
+/*  hover: pngs bekommen hintergrundfarbe (abwechselnd unterschiedliche farben)*/
+.sidebar-feed img:nth-child(5n+1):hover { background-color: #F0CCE2; } /* Rosa */
+.sidebar-feed img:nth-child(5n+2):hover { background-color: #A0995D; } /* Khaki/Grün */
+.sidebar-feed img:nth-child(5n+3):hover { background-color: #D1C2E6; } /* Periwinkle/Lila */
+.sidebar-feed img:nth-child(5n+4):hover { background-color: #B8C860; } /* Lime */
+.sidebar-feed img:nth-child(5n+5):hover { background-color: #F0E6C2; } /* Creme/Gelb */
+
+
+/* Leichtes Rauspopen beim Hovern */
+.sidebar-feed img:hover {
+    transform: scale(1.1);
+}
+
+
+
+/*------------------------------NAVIGATION---------------------------*/
+
+
+/* Navigation posittion*/
+nav {
+    height: 100vh;
+    position: fixed;
+    z-index: 10; /* Höher als z-index: 1 der Canvas */
+    display: flex;
+    flex-direction: column; /* Ordnet die Links untereinander an */
+    left: 0;
+    top: 0;
+}
+
+
+/* Styling für alle Links in der Nav */
+nav a {
+    font-family: 'Sigoil', sans-serif;
+    font-size: 16px;
+    display: inline-block;
+    width: fit-content;      /* Zwingt den Hintergrund exakt auf Textbreite */
+    padding: 1px 1px;       /* Gibt dem farbigen Hintergrund Schussraum um die Schrift */
+    text-decoration: none;
+    color: #000000;          /* Standard-Schriftfarbe */
+}
+
+
+/* einzelne Nav Links */
+.menu-hexelil{
+    margin-bottom: 150px;
+}
+
+.menu-hexelil:hover{
+    background-color: #F0E6C2;
+    color:#D1C2E6;
+    rotate: 5deg;
+    font-family: 'SigoilMedium', sans-serif;
+    font-weight: medium;
+}
+
+.menu-flashes{
+    margin-bottom: 150px;
+}
+
+.menu-flashes:hover {
+     background-color: #A0995D;
+     color: #F0E6C2;
+     rotate: -5deg;
+     font-family: 'SigoilMedium', sans-serif;
+     font-weight: medium;
+
+}
+
+.menu-flashes:active {
+    opacity: 0.5; /* Reduziert die Deckkraft, wenn der Benutzer auf die Navigation klickt */
+}
+
+.menu-booking{
+    margin-bottom: 150px;
+}
+
+.menu-booking:hover {
+    background-color:  #BDCEF8;
+    rotate: -5deg;
+    font-family: 'SigoilMedium', sans-serif;
+    font-weight: medium;
+}
+
+.menu-booking:active {
+    opacity: 0.5; /* Reduziert die Deckkraft, wenn der Benutzer auf die Navigation klickt */
+}
+
+.menu-about{
+    margin-bottom: 150px;
+}
+
+.menu-about:hover {
+    color: #D1C2E6;
+    background-color: #000000;
+    rotate: 5deg;
+    font-family: 'SigoilMedium', sans-serif;
+    font-weight: medium;
+}
+
+.menu-about:active {
+    opacity: 0.5; /* Reduziert die Deckkraft, wenn der Benutzer auf die Navigation klickt */
+}
+
+
+.menu-camera:hover{
+    color: #B8C860;
+    background-color: #F0CCE2;
+    rotate: -5deg;
+    font-family: 'SigoilMedium', sans-serif;
+    font-weight: medium;
+}
+
+
+
+.menu-imprint {
+    bottom: 0;
+    /* Schiebt den Imprint-Link ganz nach unten in der Nav 
+    FLEXBOX-TRICK: In 'flex-direction: column' saugt 'margin-top: auto' 
+    allen freien Platz über sich auf und drückt das Element an den Boden. 
+    (Voraussetzung: Das übergeordnete <nav> hat eine Höhe wie 'height: 100vh') 
+    */
+    margin-top: auto;
+}
+
+.menu-imprint:hover {
+    background-color: black;
+    color:  #B8C860;
+    rotate: 5deg;
+    display: inline-block;
+}
+
+.menu-imprint:active {
+    opacity: 0.5; /* Reduziert die Deckkraft, wenn der Benutzer auf die Navigation klickt */
+}
+
+
+
+
+/*------------------------------POPUP---------------------------*/
+
+/* popup allgemein position und einstellungen */
+.popup {
+    display: none;
+    position: fixed;           /* WICHTIG: Fixed statt relative, damit es frei schwebt */
+    z-index: 20;             
+    max-width: 320px;
+    width: fit-content;         /*schmiegt sich an den inhalt*/
+    padding: 30px 15px 15px 15px;
+    box-sizing: border-box;
+    
+}
+
+
+/* styling für alle popup fenster */
+.popup p {
+    margin: 0;
+    font-family: 'Sigoil', sans-serif;
+    font-size: 16px;
+
+    /* line-height: 1.4; */
+}
+
+/* Einblenden, wenn der Link geklickt wurde */
+.popup:target {
+    display: block;
+}
+
+
+/* styling für popup-about */
+.popup-about {
+    max-width: 800px;
+    background-color: #D1C2E6;
+    top: 330px;
+    left: 100px;
+    rotate:-5deg;
+}
+
+
+/* styling für popup-imprint */
+.popup-imprint{
+    background-color: #B8C860;
+    max-width: auto;
+    max-height: auto;
+    bottom: 0;
+    left: 100px;
+    rotate: -5deg;
+}
+
+
+
+/* Das X punktgenau oben links festnageln */
+.popup .close {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+
+
+
+
+
+/*------------------------------HINTBOX FÜR KAMERA---------------------------*/
+
+/* allgemeines styling und position für hint-box */
+.hint-box {
+    position: fixed;
+    top: 560px;
+    left: 100px;
+    background-color: #B8C860;
+    color: #F0CCE2;
+    font-family: 'Sigoil', sans-serif;
+    font-size: 16px;
+    rotate: 5deg;
+    width: fit-content;         /*schmiegt sich an den inhalt*/
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    
+    /* unsichtbar bis geklickt wird */
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Macht das Einblenden weich */
+    z-index: 10;
+}
+
+
+
+/* Dauerhafte Sichtbarkeit für die Hint-Box nach klicken (überschreibt das Hover-Verhalten) */
+.hint-box.active {
+    opacity: 1;
+}
+
+
+
+
+
+/*------------------------------KAMERA LIVEBILD---------------------------*/
+
+
+/* styling und Position für Bildschirm wenn die Kamera an ist */
+.camera-feed {
+    display: none; /* Standardmäßig ausgeblendet */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Füllt den Bildschirm ohne Verzerrung aus */
+    z-index: 5;
+}
+
+
+/* Kamwera wird über JS aktiviert */
+.camera-feed.active {
+    display: block;
+}
+
+
+
