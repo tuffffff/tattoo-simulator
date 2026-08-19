@@ -345,3 +345,39 @@ nav a {
 
 
 
+
+
+
+
+/*------------------------------WEBSITE RESPONSIVE MACHEN---------------------------*/
+
+@media (max-width: 768px) {
+  /* 1. Verhindert seitliches Scrollen */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* 2. Container auf volle Breite anpassen */
+  .main-container, .wrapper, main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* 3. Kamera & Canvas flexibel machen */
+  video, canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+  }
+
+  /* 4. Nebeneinander-Layouts untereinander stapeln */
+  .grid, .flex-row {
+    flex-direction: column !important;
+  }
+}
+
+
+
