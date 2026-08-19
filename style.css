@@ -381,3 +381,23 @@ nav a {
 
 
 
+
+/* Erwirkt maximale Anpassung auf mobilen Bildschirmen */
+@media (max-width: 768px) {
+  /* Hülle für Kamera & Overlay */
+  #container, .canvas-container, main {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  /* Zwingt Video & Overlay-Canvas genau auf Bildschirmbreite */
+  video, canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+  }
+}
