@@ -31,12 +31,19 @@ async function startCamera() {
         overlayCanvas.width = window.innerWidth;
         overlayCanvas.height = window.innerHeight;
 
+        // NEU: Prüfen, ob wir auf einem Smartphone sind (schmaler als 768px)
+        const isMobile = window.innerWidth <= 768;
+
+        // Handy = Hochformat (720x1280) | Laptop = Querformat (1280x720)
+        const cameraWidth = isMobile ? 720 : 1280;
+        const cameraHeight = isMobile ? 1280 : 720;
+
         cameraInstance = new Camera(videoElement, {
             onFrame: async () => {
                 await faceMesh.send({ image: videoElement });
             },
-            width: window.innerWidth,
-            height: window.innerHeight
+            width: cameraWidth,
+            height: cameraHeight
         });
 
         await cameraInstance.start();
@@ -47,7 +54,6 @@ async function startCamera() {
         console.error("Kamera-Fehler:", error);
     }
 }
-
 // 4. Hover- & Klick-Events für den "camera"-Menüpunkt
 if (cameraNav) {
     // A) Beim DRÜBERFAHREN (Hover): NUR das Pop-up anzeigen
