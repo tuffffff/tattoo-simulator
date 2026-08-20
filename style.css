@@ -412,7 +412,14 @@ nav a {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    object-fit: contain !important; /* HIER: contain statt cover */
+    /* Jetzt nutzen wir 'cover', da das Quellvideo (aus JS) 
+       bereits hochkant ist. Der Zoom ist jetzt minimal. */
+    object-fit: cover !important;
+  }
+
+  canvas {
+    /* Falls dein Video gespiegelt ist, muss das Canvas auch gespiegelt werden! */
+    /* transform: scaleX(-1); */ 
   }
 
 } 
