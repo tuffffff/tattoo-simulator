@@ -358,7 +358,7 @@ wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */
   .menu-imprint, 
   .menu-booking, 
   .menu-about {
-    margin-bottom: 3rem; 
+    margin-bottom: 4rem !important;
   }
 
   /* 2. Galerie-Sidebar: Von 280px auf schmale 90px verkleinern */
@@ -390,6 +390,6 @@ wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */
     left: 0;
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    object-fit: contain; /*"Quetscht das gesamte Video in den Bildschirm, egal ob Ränder entstehen."*/
   }
 }
