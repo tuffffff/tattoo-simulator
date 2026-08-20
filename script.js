@@ -24,20 +24,10 @@ faceMesh.onResults(onResults);
 
 // 3. Funktion zum Starten der Kamera (wiederverwendbar)
 async function startCamera() {
-    // Falls die Kamera schon läuft, nicht nochmal neu starten
     if (cameraInstance) return;
 
     try {
-        overlayCanvas.width = window.innerWidth;
-        overlayCanvas.height = window.innerHeight;
-
-        // NEU: Prüfen, ob wir auf einem Smartphone sind (schmaler als 768px)
-        const isMobile = window.innerWidth <= 768;
-
-        // Handy = Hochformat (720x1280) | Laptop = Querformat (1280x720)
-        const cameraWidth = isMobile ? 720 : 1280;
-        const cameraHeight = isMobile ? 1280 : 720;
-
+        // Universelle Auflösung, die JEDES Handy und jeder Laptop versteht
         cameraInstance = new Camera(videoElement, {
             onFrame: async () => {
                 await faceMesh.send({ image: videoElement });
@@ -48,12 +38,20 @@ async function startCamera() {
 
         await cameraInstance.start();
 
+        // WICHTIG: Canvas exakt auf die tatsächlichen Video-Maße synchronisieren,
+        // sobald der Kamera-Stream geladen ist. Das verhindert das Wackeln!
+        videoElement.onloadeddata = () => {
+            overlayCanvas.width = videoElement.videoWidth;
+            overlayCanvas.height = videoElement.videoHeight;
+        };
+
         videoElement.classList.add('active');
         overlayCanvas.classList.add('active');
     } catch (error) {
         console.error("Kamera-Fehler:", error);
     }
 }
+
 // 4. Hover- & Klick-Events für den "camera"-Menüpunkt
 if (cameraNav) {
     // A) Beim DRÜBERFAHREN (Hover): NUR das Pop-up anzeigen
