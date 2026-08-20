@@ -349,52 +349,47 @@ nav a {
 /*------------------------------WEBSITE RESPONSIVE MACHEN---------------------------*/
 
 @media (max-width: 768px) {
-  /* 1. Verhindert seitliches Scrollen */
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
+
+/* Zeile @media (max-width: 768px) – funktioniert wie eine Wenn-Dann-Bedingung für den Browser:
+wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */ 
+
+  /* 1. Navigation: Abstände von 8rem auf mobile 1.8rem reduzieren */
+  .menu-hexelil, 
+  .menu-flashes, 
+  .menu-booking, 
+  .menu-about {
+    margin-bottom: 1.8rem; 
   }
 
-  /* 2. Container auf volle Breite anpassen */
-  .main-container, .wrapper, main {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 10px;
-    box-sizing: border-box;
+  /* 2. Galerie-Sidebar: Von 280px auf schmale 90px verkleinern */
+  .gallery-sidebar {
+    width: 90px;
   }
 
-  /* 3. Kamera & Canvas flexibel machen */
-  video, canvas {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100%;
+  /* 3. Popups: Nicht mehr 9rem nach rechts schieben, sondern mittig auf dem Handy platzieren */
+  .popup {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    max-width: 85vw;
+    width: 85vw;
   }
 
-  /* 4. Nebeneinander-Layouts untereinander stapeln */
-  .grid, .flex-row {
-    flex-direction: column !important;
-  }
-}
-
-
-
-
-/* Erwirkt maximale Anpassung auf mobilen Bildschirmen */
-@media (max-width: 768px) {
-  /* Hülle für Kamera & Overlay */
-  #container, .canvas-container, main {
-    position: relative !important;
-    width: 100vw !important;
-    max-width: 100% !important;
-    height: auto !important;
-    overflow: hidden !important;
+  /* 4. Hint-Box: Zentriert im unteren Drittel des Handys anzeigen */
+  .hint-box {
+    left: 50% ;
+    top: 75% ;
+    transform: translateX(-50%) rotate(5deg);
+    max-width: 80vw;
   }
 
-  /* Zwingt Video & Overlay-Canvas genau auf Bildschirmbreite */
-  video, canvas {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    object-fit: cover !important;
+  /* 5. Kamera & Overlay: Deckungsgleich über den kompletten Handybildschirm legen */
+  .camera-feed, video, canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
   }
 }
