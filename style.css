@@ -115,10 +115,10 @@ nav {
 /* Styling für alle Links in der Nav */
 nav a {
     font-family: 'Sigoil', sans-serif;
-    font-size: 16px;
+    font-size: 1rem; /*1rem = 16px  Globale Layouts, Popups, Abstände, Überschriften */
     display: inline-block;
     width: fit-content;      /* Zwingt den Hintergrund exakt auf Textbreite */
-    padding: 1px 1px;       /* Gibt dem farbigen Hintergrund Schussraum um die Schrift */
+    padding: 0.3vw 0.3vw;       /* Gibt dem farbigen Hintergrund Schussraum um die Schrift */
     text-decoration: none;
     color: #000000;          /* Standard-Schriftfarbe */
 }
@@ -126,7 +126,7 @@ nav a {
 
 /* einzelne Nav Links */
 .menu-hexelil{
-    margin-bottom: 150px;
+    margin-bottom: 8rem;
 }
 
 .menu-hexelil:hover{
@@ -138,7 +138,7 @@ nav a {
 }
 
 .menu-flashes{
-    margin-bottom: 150px;
+    margin-bottom: 8rem;
 }
 
 .menu-flashes:hover {
@@ -155,11 +155,12 @@ nav a {
 }
 
 .menu-booking{
-    margin-bottom: 150px;
+    margin-bottom: 8rem;
 }
 
 .menu-booking:hover {
-    background-color:  #BDCEF8;
+    color:  #B8C860;
+    background-color: #F0CCE2;
     rotate: -5deg;
     font-family: 'SigoilMedium', sans-serif;
     font-weight: medium;
@@ -170,7 +171,7 @@ nav a {
 }
 
 .menu-about{
-    margin-bottom: 150px;
+    margin-bottom: 8rem;
 }
 
 .menu-about:hover {
@@ -187,8 +188,7 @@ nav a {
 
 
 .menu-camera:hover{
-    color: #B8C860;
-    background-color: #F0CCE2;
+    background-color: #BDCEF8;
     rotate: -5deg;
     font-family: 'SigoilMedium', sans-serif;
     font-weight: medium;
@@ -227,11 +227,11 @@ nav a {
     display: none;
     position: fixed;           /* WICHTIG: Fixed statt relative, damit es frei schwebt */
     z-index: 20;             
-    max-width: 320px;
-    width: fit-content;         /*schmiegt sich an den inhalt*/
-    padding: 30px 15px 15px 15px;
+    max-width: 40rem;
+    height: auto;
+    padding: 1.1rem 1.1rem 1.1rem 1.1rem;
     box-sizing: border-box;
-    
+    left: 9rem;
 }
 
 
@@ -239,7 +239,7 @@ nav a {
 .popup p {
     margin: 0;
     font-family: 'Sigoil', sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
 
     /* line-height: 1.4; */
 }
@@ -252,10 +252,8 @@ nav a {
 
 /* styling für popup-about */
 .popup-about {
-    max-width: 800px;
     background-color: #D1C2E6;
-    top: 330px;
-    left: 100px;
+    top: 20rem;
     rotate:-5deg;
 }
 
@@ -266,7 +264,6 @@ nav a {
     max-width: auto;
     max-height: auto;
     bottom: 0;
-    left: 100px;
     rotate: -5deg;
 }
 
@@ -293,16 +290,16 @@ nav a {
 
 /* allgemeines styling und position für hint-box */
 .hint-box {
-    position: fixed;
-    top: 560px;
-    left: 100px;
-    background-color: #B8C860;
-    color: #F0CCE2;
+    position: fixed;    
+    top: 31rem; /* (3*8rem+4*1rem) */
+    left: 9rem;
+    background-color: #000000;
+    color: #BDCEF8;
     font-family: 'Sigoil', sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     rotate: 5deg;
     width: fit-content;         /*schmiegt sich an den inhalt*/
-    padding: 10px 10px 10px 10px;
+    padding: 1.1rem 1.1rem 1.1rem 1.1rem;
     box-sizing: border-box;
     
     /* unsichtbar bis geklickt wird */
@@ -328,7 +325,7 @@ nav a {
 /* styling und Position für Bildschirm wenn die Kamera an ist */
 .camera-feed {
     display: none; /* Standardmäßig ausgeblendet */
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
