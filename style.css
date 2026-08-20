@@ -348,48 +348,59 @@ nav a {
 
 /*------------------------------WEBSITE RESPONSIVE MACHEN---------------------------*/
 
+/*------------------------------MOBILE FIXES---------------------------*/
+
 @media (max-width: 768px) {
 
-/* Zeile @media (max-width: 768px) – funktioniert wie eine Wenn-Dann-Bedingung für den Browser:
-wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */ 
+  /* 1. Safari-Leisten Fix: dvh (dynamic vh) passt sich exakt der echten Handyhöhe an */
+  html, body, nav {
+    height: 100dvh !important;
+  }
 
-  /* 1. Navigation: Abstände von 8rem auf mobile 1.8rem reduzieren */
+  /* 2. Navigation: Abstände verkleinern & Unten-Abstand für Imprint einbauen */
+  nav {
+    padding-bottom: 30px !important; /* Sichere Distanz zur Safari-Adressleiste */
+  }
+
   .menu-hexelil, 
-  .menu-imprint, 
+  .menu-flashes, 
   .menu-booking, 
   .menu-about {
-    margin-bottom: 4rem !important;
+    margin-bottom: 5rem !important; /* Wesentlich kompaktere Abstände */
   }
 
-  /* 2. Galerie-Sidebar: Von 280px auf schmale 90px verkleinern */
-  .gallery-sidebar {
-    width: 90px;
-  }
-
-  /* 3. Popups: Nicht mehr 9rem nach rechts schieben, sondern mittig auf dem Handy platzieren */
-  .popup {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(-5deg);
-    max-width: 85vw;
-    width: 85vw;
-  }
-
-  /* 4. Hint-Box: Zentriert im unteren Drittel des Handys anzeigen */
+  /* 3. Hint-Box unter das Gesicht schieben */
   .hint-box {
-    left: 50% ;
-    top: 50% ;
-    transform: translateX(-50%) rotate(5deg);
-    max-width: 80vw;
+    left: 50% !important;
+    top: 68% !important; /* Wandert weiter nach unten, damit dein Gesicht frei bleibt */
+    transform: translateX(-50%) rotate(5deg) !important;
+    width: 80vw !important;
+    font-size: 0.85rem !important;
   }
 
-  /* 5. Kamera & Overlay: Deckungsgleich über den kompletten Handybildschirm legen */
-  .camera-feed, video, canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain; /*"Quetscht das gesamte Video in den Bildschirm, egal ob Ränder entstehen."*/
+  /* 4. Imprint- & About-Popups mittig platzieren */
+  .popup-about, .popup {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) rotate(-5deg) !important;
+    width: 85vw !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* 4. Imprint- & About-Popups mittig platzieren */
+  .popup-imprint, {
+    left: 50% !important;
+    top: 80% !important;
+    transform: translate(-50%, -50%) rotate(-5deg) !important;
+    width: 85vw !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+  }
+
+
+  /* 5. Galerie-Sidebar schmal halten */
+  .gallery-sidebar {
+    width: 80px !important;
   }
 }
