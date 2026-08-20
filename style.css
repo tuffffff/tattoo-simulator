@@ -355,10 +355,10 @@ wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */
 
   /* 1. Navigation: Abstände von 8rem auf mobile 1.8rem reduzieren */
   .menu-hexelil, 
-  .menu-flashes, 
+  .menu-imprint, 
   .menu-booking, 
   .menu-about {
-    margin-bottom: 1.8rem; 
+    margin-bottom: 3rem; 
   }
 
   /* 2. Galerie-Sidebar: Von 280px auf schmale 90px verkleinern */
@@ -378,7 +378,7 @@ wenn Bildschirm kleiner ist als... dann werden diese Bedinungen gemacht */
   /* 4. Hint-Box: Zentriert im unteren Drittel des Handys anzeigen */
   .hint-box {
     left: 50% ;
-    top: 75% ;
+    top: 50% ;
     transform: translateX(-50%) rotate(5deg);
     max-width: 80vw;
   }
