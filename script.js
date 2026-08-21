@@ -1,12 +1,17 @@
 // 1. Elemente aus dem DOM holen
-const cameraNav = document.getElementById('nav-camera'); // Dein neues Menü-Element
+const navCamera = document.getElementById('nav-camera');
+const navAbout = document.getElementById('nav-about');
+const navImprint = document.getElementById('nav-imprint');
+
+const hintCamera = document.getElementById('hint-camera');
+const hintAbout = document.getElementById('hint-about');
+const hintImprint = document.getElementById('hint-imprint');
+
 const videoElement = document.getElementById('webcam');
-const camHint = document.getElementById('cam-hint');
 const overlayCanvas = document.getElementById('tattoo-overlay');
-const ctx = overlayCanvas.getContext('2d');
 
 let selectedTattooImage = null;
-let cameraInstance = null; // Speichert die Kamera-Instanz, damit sie nur 1x startet
+let cameraInstance = null;
 
 // 2. MediaPipe FaceMesh konfigurieren
 const faceMesh = new FaceMesh({
@@ -22,12 +27,11 @@ faceMesh.setOptions({
 
 faceMesh.onResults(onResults);
 
-// 3. Funktion zum Starten der Kamera (wiederverwendbar)
+// 3. Funktion zum Starten der Kamera
 async function startCamera() {
     if (cameraInstance) return;
 
     try {
-        // Universelle Auflösung, die JEDES Handy und jeder Laptop versteht
         cameraInstance = new Camera(videoElement, {
             onFrame: async () => {
                 await faceMesh.send({ image: videoElement });
@@ -38,8 +42,6 @@ async function startCamera() {
 
         await cameraInstance.start();
 
-        // WICHTIG: Canvas exakt auf die tatsächlichen Video-Maße synchronisieren,
-        // sobald der Kamera-Stream geladen ist. Das verhindert das Wackeln!
         videoElement.onloadeddata = () => {
             overlayCanvas.width = videoElement.videoWidth;
             overlayCanvas.height = videoElement.videoHeight;
@@ -52,68 +54,72 @@ async function startCamera() {
     }
 }
 
-// 4. Hover- & Klick-Events für den "camera"-Menüpunkt
-if (cameraNav) {
-    // A) Beim DRÜBERFAHREN (Hover): NUR das Pop-up anzeigen
-    cameraNav.addEventListener('mouseenter', () => {
-        if (camHint) {
-            camHint.textContent = "click to start the tattoo simulator";
-            camHint.classList.add('active');
-            camHint.style.display = 'block';
+// Hilfsfunktion: Schließt alle offenen Hint-Boxen
+function hideAllHints() {
+    if (hintCamera) hintCamera.classList.remove('active');
+    if (hintAbout) hintAbout.classList.remove('active');
+    if (hintImprint) hintImprint.classList.remove('active');
+}
+
+// 4. Steuerung: CAMERA
+if (navCamera) {
+    navCamera.addEventListener('mouseenter', () => {
+        if (!hintCamera.classList.contains('active')) {
+            hintCamera.textContent = "click to start the tattoo simulator";
+            hintCamera.classList.add('active');
         }
     });
 
-    // B) Beim VERLASSEN: Pop-up wieder verstecken (falls Kamera noch nicht aktiv)
-    cameraNav.addEventListener('mouseleave', () => {
-        if (camHint && !cameraInstance) {
-            camHint.style.display = 'none';
+    navCamera.addEventListener('mouseleave', () => {
+        if (!cameraInstance) {
+            hintCamera.classList.remove('active');
         }
     });
 
-    // C) Erst beim KLICKEN: Kamera starten!
-    cameraNav.addEventListener('click', (e) => {
+    navCamera.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        startCamera(); // Kamera geht jetzt erst hier an!
-
-        if (camHint) {
-            camHint.textContent = "you like a tattoo? click one to try how it looks.";
-            camHint.style.display = 'block';
+        startCamera();
+        if (hintCamera) {
+            hintCamera.textContent = "you like a tattoo? click one in the gallery to try how it looks.";
+            hintCamera.classList.add('active');
         }
     });
 }
-// 5. Klick-Event für die Tattoo-Auswahl
-document.querySelectorAll('.big-tattoos').forEach(tattooImg => {
-    tattooImg.addEventListener('click', (e) => {
-        selectedTattooImage = e.target; 
-        if (camHint) {
-            camHint.textContent = "click another one to try a different tattoo";
-            camHint.style.display = 'block';
-        }
+
+// 5. Steuerung: ABOUT
+if (navAbout) {
+    navAbout.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isActive = hintAbout.classList.contains('active');
+        hideAllHints();
+        if (!isActive) hintAbout.classList.add('active');
     });
-});
+}
 
+// 6. Steuerung: IMPRINT
+if (navImprint) {
+    navImprint.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isActive = hintImprint.classList.contains('active');
+        hideAllHints();
+        if (!isActive) hintImprint.classList.add('active');
+    });
+}
 
-// 6. Zeichne-Schleife: Rendering auf der rechten Wange
+// 7. Zeichne-Schleife für Gesichtstracking
 function onResults(results) {
     const ctx = overlayCanvas.getContext('2d');
     ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
     if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
         const landmarks = results.multiFaceLandmarks[0];
-
-        // Punkt 50 = Rechter Wangenknochen
-        const cheek = landmarks[50];
+        const cheek = landmarks[50]; // Punkt 50 = Rechter Wangenknochen
 
         if (cheek) {
             const x = cheek.x * overlayCanvas.width;
             const y = cheek.y * overlayCanvas.height;
-            
-            // --- HIER DIE GRÖSSE ÄNDERN ---
-            const size = 90; // Vorher 150, jetzt kleiner
-            // -------------------------------
+            const size = 90;
 
-            // Zeichnen (Die Positionierung bleibt gleich)
             ctx.drawImage(
                 selectedTattooImage, 
                 x - (size / 2), 
@@ -125,12 +131,11 @@ function onResults(results) {
     }
 }
 
-//sidebar rechts//
-
+// 8. Galerie Sidebar-Bilder laden
 const gallery = document.getElementById('tattoo-canvas');
 
 if (gallery) {
-    gallery.innerHTML = ''; // Leeren
+    gallery.innerHTML = '';
 
     for (let i = 8; i <= 91; i++) {
         const img = document.createElement('img');
@@ -139,12 +144,11 @@ if (gallery) {
         img.src = `assets/png/Motiv-${number}.png`; 
         img.className = 'sidebar-flash';
         
-        // Klick auf Flash wählt das Tattoo aus
         img.onclick = (e) => {
             selectedTattooImage = e.target;
-            if (camHint) {
-                camHint.textContent = "click another one to try a different tattoo";
-                camHint.style.display = 'block';
+            if (hintCamera) {
+                hintCamera.textContent = "click another one to try a different tattoo";
+                hintCamera.classList.add('active');
             }
         };
         
