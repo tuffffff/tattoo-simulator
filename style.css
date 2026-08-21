@@ -43,79 +43,78 @@ html, body {
     background-color: #ffffff;
 }
 
-/*------------------------------ GALLERY SIDEBAR ---------------------------*/
+/*------------------------------ GALLERY BOTTOMBAR ---------------------------*/
 .gallery-sidebar {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100vh;
-    overflow-y: scroll;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 180px;            /* Etwas kompakter, damit es nicht das halbe Bild verdeckt */
+    overflow-x: auto;         /* Horizontales Scrollen aktivieren */
+    overflow-y: hidden;       /* Kein vertikales Wackeln */
     z-index: 15;
     box-sizing: border-box;
     scrollbar-width: none;
+    
+    /* Platz für den Glow-Schatten rundherum, damit nichts abgeschnitten wird */
+    padding: 20px 10px;      
 }
 
 .gallery-sidebar::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+    display: none;            /* Scrollbar unsichtbar machen */
 }
 
 .sidebar-feed {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;      /* BNEBENEINANDER anordnen */
+    gap: 15px;                /* Gleichmäßiger Abstand zwischen den Flashes */
+    height: 100%;             /* Füllt die volle Höhe der Leiste aus */
+    align-items: center;      /* Zentriert die Bilder vertikal */
 }
 
 .sidebar-feed img {
-    width: 100%;
-    height: auto;
+    height: 100%;             /* Richtet sich nach der Höhe der Leiste */
+    width: auto;              /* Behält das Seitenverhältnis exakt bei */
+    flex-shrink: 0;           /* WICHTIG: Verhindert, dass die Bilder zusammengedrückt werden! */
     display: block;
     box-sizing: border-box;
     cursor: pointer;
-    border-radius: 8px; /* Leichte Eckenabrundung für den Glow-Effekt */
+    border-radius: 8px;
     
-    /* Weiche Übergänge für Hintergrund, Vergrößerung und den Glow-Schatten */
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* HOVER-FARBEN MIT WEICHEM GLOW-SCHATTEN */
 
-/* 1. Rosa Glow */
 .sidebar-feed img:nth-child(5n+1):hover { 
     background-color: #F0CCE2; 
     box-shadow: 0 0 20px 15px #F0CCE2;
 }
 
-/* 2. Khaki/Grün Glow */
 .sidebar-feed img:nth-child(5n+2):hover { 
     background-color: #A0995D; 
     box-shadow: 0 0 20px 15px #A0995D;
 }
 
-/* 3. Lila Glow */
 .sidebar-feed img:nth-child(5n+3):hover { 
     background-color: #D1C2E6; 
     box-shadow: 0 0 20px 15px #D1C2E6;
 }
 
-/* 4. Blau/Lime Glow */
 .sidebar-feed img:nth-child(5n+4):hover { 
     background-color: #BDCEF8; 
     box-shadow: 0 0 20px 15px #BDCEF8;
 }
 
-/* 5. Gelb/Creme Glow */
 .sidebar-feed img:nth-child(5n+5):hover { 
     background-color: #F0E6C2; 
     box-shadow: 0 0 20px 15px #F0E6C2;
 }
 
-/* Vergrößern beim Hovern */
 .sidebar-feed img:hover {
-    transform: scale(1.05); /* Leicht verkleinert von 1.1 auf 1.05, damit der Glow Platz hat */
-    z-index: 20;           /* Hebt das gehoverte Bild über die anderen */
+    transform: scale(1.08);
+    z-index: 20;
 }
-
 /*------------------------------ NAVIGATION ---------------------------*/
 nav {
     height: 100vh;
@@ -140,6 +139,12 @@ nav a {
 
 .menu-hexelil {
     margin-bottom: 8rem;
+    box-shadow: 0 0 3px 0 #f0cce2,
+                0 0 5px 0  #f0cce2, 
+                0 0 10px 0  #f0cce2,
+                0 0 15px 0  #f0cce2,
+                0 0 25px 0  #f0cce2;
+    background-color: #f0cce2;
 }
 
 .menu-hexelil:hover {
@@ -212,6 +217,8 @@ nav a:active {
     pointer-events: none;
     transition: opacity 0.4s ease;
     z-index: 10;
+
+    
 }
 .hint-box.active {
     opacity: 1;
