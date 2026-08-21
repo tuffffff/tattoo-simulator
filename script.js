@@ -86,26 +86,27 @@ if (navCamera) {
     });
 }
 
-// 5. Steuerung: ABOUT
+// 5. Steuerung: ABOUT (Hover in & Hover out)
 if (navAbout) {
-    navAbout.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isActive = hintAbout.classList.contains('active');
-        hideAllHints();
-        if (!isActive) hintAbout.classList.add('active');
+    navAbout.addEventListener('mouseenter', () => {
+        if (hintAbout) hintAbout.classList.add('active');
+    });
+
+    navAbout.addEventListener('mouseleave', () => {
+        if (hintAbout) hintAbout.classList.remove('active');
     });
 }
 
-// 6. Steuerung: IMPRINT
+// 6. Steuerung: IMPRINT (Hover in & Hover out)
 if (navImprint) {
-    navImprint.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isActive = hintImprint.classList.contains('active');
-        hideAllHints();
-        if (!isActive) hintImprint.classList.add('active');
+    navImprint.addEventListener('mouseenter', () => {
+        if (hintImprint) hintImprint.classList.add('active');
+    });
+
+    navImprint.addEventListener('mouseleave', () => {
+        if (hintImprint) hintImprint.classList.remove('active');
     });
 }
-
 // 7. Zeichne-Schleife für Gesichtstracking
 function onResults(results) {
     const ctx = overlayCanvas.getContext('2d');
