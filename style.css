@@ -222,19 +222,25 @@ nav a:active {
 .hint-camera {
     top: 31rem;
     rotate: 1.5deg;
+    background-color:  #BDCEF8; 
+    box-shadow: 0 0 20px 20px #BDCEF8; 
 }
 
 .hint-about {
     top: 17rem;
-
+    background-color:  #D1C2E6;
+    box-shadow: 0 0 20px 20px #D1C2E6;
     color: #000000;
     rotate: -1.5deg;
+    
 }
 
 .hint-imprint {
     bottom: 2rem;
     color: #000000;
     rotate: -1.5deg;
+    background-color:   #F0E6C2;
+    box-shadow: 0 0 20px 20px  #F0E6C2;
 }
 
 /*------------------------------ KAMERA LIVEBILD ---------------------------*/
