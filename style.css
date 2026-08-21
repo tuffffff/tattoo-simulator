@@ -49,7 +49,7 @@ html, body {
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 180px;            /* Etwas kompakter, damit es nicht das halbe Bild verdeckt */
+    height: 250px;            /* Etwas kompakter, damit es nicht das halbe Bild verdeckt */
     overflow-x: auto;         /* Horizontales Scrollen aktivieren */
     overflow-y: hidden;       /* Kein vertikales Wackeln */
     z-index: 15;
@@ -64,18 +64,21 @@ html, body {
     display: none;            /* Scrollbar unsichtbar machen */
 }
 
+/* Container-Ausrichtung anpassen */
 .sidebar-feed {
     display: flex;
-    flex-direction: row;      /* BNEBENEINANDER anordnen */
-    gap: 15px;                /* Gleichmäßiger Abstand zwischen den Flashes */
-    height: 100%;             /* Füllt die volle Höhe der Leiste aus */
-    align-items: center;      /* Zentriert die Bilder vertikal */
+    flex-direction: row;
+    gap: 15px;
+    height: 100%;
+    align-items: flex-end;    /* WICHTIG: Stellt alle Bilder unten auf eine Grundlinie! */
 }
 
 .sidebar-feed img {
-    height: 100%;             /* Richtet sich nach der Höhe der Leiste */
-    width: auto;              /* Behält das Seitenverhältnis exakt bei */
-    flex-shrink: 0;           /* WICHTIG: Verhindert, dass die Bilder zusammengedrückt werden! */
+    /* Max-Höhe begrenzen, damit riesige Bilder die Leiste nicht sprengen */
+    max-height: 200px;        
+    width: auto;              /* Behält das originale Seitenverhältnis bei */
+    height: auto;             /* Erlaubt unterschiedliche nativ verankerte Höhen */
+    flex-shrink: 0;
     display: block;
     box-sizing: border-box;
     cursor: pointer;
@@ -84,6 +87,12 @@ html, body {
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hover-Effekt: Vergrößert sich sauber nach oben weg, da der Anker unten ist */
+.sidebar-feed img:hover {
+    transform: scale(0.9);
+    transform-origin: bottom center; /* Vergrößert das Bild von unten nach oben */
+    z-index: 20;
+}
 /* HOVER-FARBEN MIT WEICHEM GLOW-SCHATTEN */
 
 /* 1. Rosa Glow Layer */
