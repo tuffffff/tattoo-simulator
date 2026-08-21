@@ -86,7 +86,7 @@ html, body {
 .sidebar-feed img:nth-child(5n+1):hover { background-color: #F0CCE2; } /* Rosa */
 .sidebar-feed img:nth-child(5n+2):hover { background-color: #A0995D; } /* Khaki/Grün */
 .sidebar-feed img:nth-child(5n+3):hover { background-color: #D1C2E6; } /* Periwinkle/Lila */
-.sidebar-feed img:nth-child(5n+4):hover { background-color: #B8C860; } /* Lime */
+.sidebar-feed img:nth-child(5n+4):hover { background-color: #BDCEF8; } /* Lime */
 .sidebar-feed img:nth-child(5n+5):hover { background-color: #F0E6C2; } /* Creme/Gelb */
 
 
@@ -114,13 +114,14 @@ nav {
 
 /* Styling für alle Links in der Nav */
 nav a {
-    font-family: 'Sigoil', sans-serif;
-    font-size: 1rem; /*1rem = 16px  Globale Layouts, Popups, Abstände, Überschriften */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem; /*1rem = 16px  Globale Layouts, Popups, Abstände, Überschriften */
     display: inline-block;
     width: fit-content;      /* Zwingt den Hintergrund exakt auf Textbreite */
     padding: 0.2rem 0.2rem;      /* Gibt dem farbigen Hintergrund Schussraum um die Schrift */
     text-decoration: none;
     color: #000000;          /* Standard-Schriftfarbe */
+    border-radius: 100%
 }
 
 
@@ -130,38 +131,21 @@ nav a {
 }
 
 .menu-hexelil:hover{
-    background-color: #F0E6C2;
-    color:#D1C2E6;
-    rotate: 5deg;
+    color:#F0CCE2;
+    rotate: 2.5deg;
     font-family: 'SigoilMedium', sans-serif;
     font-weight: medium;
 }
 
-.menu-flashes{
-    margin-bottom: 8rem;
-}
 
-.menu-flashes:hover {
-     background-color: #A0995D;
-     color: #F0E6C2;
-     rotate: -5deg;
-     font-family: 'SigoilMedium', sans-serif;
-     font-weight: medium;
-
-}
-
-.menu-flashes:active {
-    opacity: 0.5; /* Reduziert die Deckkraft, wenn der Benutzer auf die Navigation klickt */
-}
 
 .menu-booking{
     margin-bottom: 8rem;
 }
 
 .menu-booking:hover {
-    color:  #B8C860;
-    background-color: #F0CCE2;
-    rotate: -5deg;
+    color:  #A0995D;
+    rotate: -2.5deg;
     font-family: 'SigoilMedium', sans-serif;
     font-weight: medium;
 }
@@ -175,9 +159,8 @@ nav a {
 }
 
 .menu-about:hover {
-    color: #D1C2E6;
-    background-color: #000000;
-    rotate: 5deg;
+    color:  #D1C2E6;
+    rotate: 2.5deg;
     font-family: 'SigoilMedium', sans-serif;
     font-weight: medium;
 }
@@ -188,10 +171,9 @@ nav a {
 
 
 .menu-camera:hover{
-    background-color: #BDCEF8;
-    rotate: -5deg;
+    color: #BDCEF8; 
+    rotate: -2.5deg;
     font-family: 'SigoilMedium', sans-serif;
-    font-weight: medium;
 }
 
 
@@ -207,10 +189,10 @@ nav a {
 }
 
 .menu-imprint:hover {
-    background-color: black;
-    color:  #B8C860;
-    rotate: 5deg;
+    color:  #F0E6C2;
+    rotate: 2.5deg;
     display: inline-block;
+    font-family: 'SigoilMedium', sans-serif;
 }
 
 .menu-imprint:active {
@@ -229,9 +211,9 @@ nav a {
     z-index: 20;             
     max-width: 40rem;
     height: auto;
-    padding: 1rem 1rem;
+    padding: 0.8rem;
     box-sizing: border-box;
-    left: 9rem;
+    left: 6.5rem;
 }
 
 
@@ -239,7 +221,7 @@ nav a {
 .popup p {
     margin: 0;
     font-family: 'Sigoil', sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
 
     /* line-height: 1.4; */
 }
@@ -254,7 +236,7 @@ nav a {
 .popup-about {
     background-color: #D1C2E6;
     top: 20rem;
-    rotate:-5deg;
+    rotate:-1.5deg;
 }
 
 
@@ -264,7 +246,7 @@ nav a {
     max-width: auto;
     max-height: auto;
     bottom: 0;
-    rotate: -5deg;
+    rotate: -1.5deg;
 }
 
 
@@ -292,14 +274,14 @@ nav a {
 .hint-box {
     position: fixed;    
     top: 31rem; /* (3*8rem+4*1rem) */
-    left: 9rem;
+    left: 6.5rem;
     background-color: #000000;
     color: #BDCEF8;
     font-family: 'Sigoil', sans-serif;
-    font-size: 1rem;
-    rotate: 5deg;
+    font-size: 0.8rem;
+    rotate: 1.5deg;
     width: fit-content;         /*schmiegt sich an den inhalt*/
-    padding: 1rem 1rem;
+    padding: 0.8rem 0.8rem;
     box-sizing: border-box;
     
     /* unsichtbar bis geklickt wird */
