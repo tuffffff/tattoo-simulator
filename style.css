@@ -141,8 +141,8 @@ nav {
     position: fixed;
     z-index: 10;
     display: flex;
-    flex-direction: column;
-    left: 0;
+    flex-direction:row;
+    right: 0;
     top: 0;
 }
 
@@ -155,16 +155,14 @@ nav a {
     text-decoration: none;
     color: #000000;
     border-radius: 100%;
+    margin-left: 1rem;
 }
 
-.menu-hexelil {
-    margin-bottom: 8rem;
-    box-shadow: 0 0 3px 0 #f0cce2,
-                0 0 5px 0  #f0cce2, 
-                0 0 10px 0  #f0cce2,
-                0 0 15px 0  #f0cce2,
-                0 0 25px 0  #f0cce2;
-    background-color: #f0cce2;
+.menu-hexelil{
+    position: fixed;   /* Löst das Element vom nav-Container ab */
+    left: 0;        /* Klebt fest am linken Bildschirmrand */
+    top: 0;         /* Auf gleicher Höhe wie die restliche Nav */
+    margin-left: 0;    /* Entfernt den Abstand nach links */
 }
 
 .menu-hexelil:hover {
@@ -172,18 +170,12 @@ nav a {
     rotate: 2.5deg;
 }
 
-.menu-booking {
-    margin-bottom: 8rem;
-}
 
 .menu-booking:hover {
     color: #A0995D;
     rotate: -2.5deg;
 }
 
-.menu-about {
-    margin-bottom: 8rem;
-}
 
 .menu-about:hover {
     color: #D1C2E6;
@@ -195,10 +187,6 @@ nav a {
     rotate: -2.5deg;
 }
 
-.menu-imprint {
-    margin-top: auto;
-}
-
 .menu-imprint:hover {
     color: #F0E6C2;
     rotate: 2.5deg;
@@ -208,66 +196,93 @@ nav a:active {
     opacity: 0.5;
 }
 
+
 /*------------------------------ HINT-BOXEN ---------------------------*/
 .hint-box {
-    position: fixed;    
-    left: 6.5rem;
+    position: fixed;
+    /* Kleine Abstände zu allen 4 Bildschirmrändern */
+    top: 15px;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    
+    width: auto;                  /* Erstreckt sich von left bis right */
+    height: auto;                 /* Erstreckt sich von top bis bottom */
+    
     font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    width: fit-content;
-    max-width: 20rem;
-    padding: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 3rem;
     box-sizing: border-box;
     color: #000000;
     
-    /* KEINE harten Ränder mehr! */
     border: none;
-    border-radius: 8px;
+    border-radius: 16px;          /* Abgerundete Ecken für das Bildschirm-Overlay */
     
-    /* 1. Extrem weicher, verschwommener Hintergrund */
-    background-color: #f0cce2;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     
-    /* 2. Der magische Trick: Ein riesiger farbiger Schatten, der die Kanten komplett aufweicht */
-    box-shadow: 0 0 20px 20px  #f0cce2;
-    
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
-    z-index: 10;
-
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 20;
     
+    /* Layout für zentrierten Inhalt */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .hint-box.active {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Positionen & Farben der einzelnen Hints */
+/* 1. CAMERA HINT */
 .hint-camera {
-    top: 31rem;
-    rotate: 1.5deg;
-    background-color:  #BDCEF8; 
-    box-shadow: 0 0 20px 20px #BDCEF8; 
+    background-color: rgba(189, 206, 248, 0.9); 
+    box-shadow: 0 0 10px 0 #BDCEF8,
+                0 0 20px 0 #BDCEF8, 
+                0 0 35px 0 #BDCEF8,
+                0 0 50px 0 #BDCEF8;
 }
 
+/* 2. HINT ABOUT (mit Hochformat-Bild) */
 .hint-about {
-    top: 17rem;
-    background-color:  #D1C2E6;
-    box-shadow: 0 0 20px 20px #D1C2E6;
-    color: #000000;
-    rotate: -1.5deg;
+    background-color: rgba(209, 194, 230, 0.9);
+    box-shadow: 0 0 10px 0 #D1C2E6,
+                0 0 20px 0 #D1C2E6, 
+                0 0 35px 0 #D1C2E6,
+                0 0 50px 0 #D1C2E6;
     
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.5rem;
 }
 
+.hint-profile-img {
+    width: 240px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.hint-text {
+    max-width: 500px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* 3. HINT IMPRINT */
 .hint-imprint {
-    bottom: 2rem;
-    color: #000000;
-    rotate: -1.5deg;
-    background-color:   #F0E6C2;
-    box-shadow: 0 0 20px 20px  #F0E6C2;
+    background-color: rgba(240, 230, 194, 0.9);
+    box-shadow: 0 0 10px 0 #F0E6C2,
+                0 0 20px 0 #F0E6C2, 
+                0 0 35px 0 #F0E6C2,
+                0 0 50px 0 #F0E6C2;
 }
 
 /*------------------------------ KAMERA LIVEBILD ---------------------------*/
