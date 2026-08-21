@@ -1,4 +1,9 @@
-// 1. Elemente aus dem DOM holen
+// 1. Variablen anlegen
+let selectedTattooImage = null;
+let cameraInstance = null;
+let hasChosenTattoo = false;
+
+// 2. Elemente aus dem DOM holen
 const navCamera = document.getElementById('nav-camera');
 const navAbout = document.getElementById('nav-about');
 const navImprint = document.getElementById('nav-imprint');
@@ -10,10 +15,7 @@ const hintImprint = document.getElementById('hint-imprint');
 const videoElement = document.getElementById('webcam');
 const overlayCanvas = document.getElementById('tattoo-overlay');
 
-let selectedTattooImage = null;
-let cameraInstance = null;
-
-// 2. MediaPipe FaceMesh konfigurieren
+// 3. MediaPipe FaceMesh konfigurieren
 const faceMesh = new FaceMesh({
     locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
 });
@@ -27,7 +29,7 @@ faceMesh.setOptions({
 
 faceMesh.onResults(onResults);
 
-// 3. Funktion zum Starten der Kamera
+// 4. Funktion zum Starten der Kamera
 async function startCamera() {
     if (cameraInstance) return;
 
@@ -61,53 +63,63 @@ function hideAllHints() {
     if (hintImprint) hintImprint.classList.remove('active');
 }
 
-// 4. Steuerung: CAMERA
+// 5. Steuerung: CAMERA (Per Klick öffnen / Umschalten)
 if (navCamera) {
-    navCamera.addEventListener('mouseenter', () => {
-        if (!hintCamera.classList.contains('active')) {
-            hintCamera.textContent = "click to start the tattoo simulator";
-            hintCamera.classList.add('active');
-        }
-    });
-
-    navCamera.addEventListener('mouseleave', () => {
-        if (!cameraInstance) {
-            hintCamera.classList.remove('active');
-        }
-    });
-
     navCamera.addEventListener('click', (e) => {
         e.preventDefault();
+        
+        // Wenn die Hintbox der Kamera offen ist: Schließen
+        if (hintCamera && hintCamera.classList.contains('active')) {
+            hintCamera.classList.remove('active');
+            return;
+        }
+
+        hideAllHints();
         startCamera();
-        if (hintCamera) {
+        
+        if (hintCamera && !hasChosenTattoo) {
             hintCamera.textContent = "you like a tattoo? click one in the gallery to try how it looks.";
             hintCamera.classList.add('active');
         }
     });
 }
 
-// 5. Steuerung: ABOUT (Hover in & Hover out)
+// 6. Steuerung: ABOUT (Toggle per Klick)
 if (navAbout) {
-    navAbout.addEventListener('mouseenter', () => {
-        if (hintAbout) hintAbout.classList.add('active');
-    });
-
-    navAbout.addEventListener('mouseleave', () => {
-        if (hintAbout) hintAbout.classList.remove('active');
+    navAbout.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = hintAbout.classList.contains('active');
+        hideAllHints();
+        
+        if (!isOpen) {
+            hintAbout.classList.add('active');
+        }
     });
 }
 
-// 6. Steuerung: IMPRINT (Hover in & Hover out)
+// 7. Steuerung: IMPRINT (Toggle per Klick)
 if (navImprint) {
-    navImprint.addEventListener('mouseenter', () => {
-        if (hintImprint) hintImprint.classList.add('active');
-    });
-
-    navImprint.addEventListener('mouseleave', () => {
-        if (hintImprint) hintImprint.classList.remove('active');
+    navImprint.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = hintImprint.classList.contains('active');
+        hideAllHints();
+        
+        if (!isOpen) {
+            hintImprint.classList.add('active');
+        }
     });
 }
-// 7. Zeichne-Schleife für Gesichtstracking
+
+// Klick auf eine offene Hintbox schließt sie wieder
+[hintCamera, hintAbout, hintImprint].forEach(box => {
+    if (box) {
+        box.addEventListener('click', () => {
+            box.classList.remove('active');
+        });
+    }
+});
+
+// 8. Zeichne-Schleife für Gesichtstracking
 function onResults(results) {
     const ctx = overlayCanvas.getContext('2d');
     ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
@@ -132,7 +144,7 @@ function onResults(results) {
     }
 }
 
-// 8. Galerie Sidebar-Bilder laden
+// 9. Galerie Sidebar-Bilder laden
 const gallery = document.getElementById('tattoo-canvas');
 
 if (gallery) {
@@ -147,9 +159,28 @@ if (gallery) {
         
         img.onclick = (e) => {
             selectedTattooImage = e.target;
-            if (hintCamera) {
-                hintCamera.textContent = "click another one to try a different tattoo";
-                hintCamera.classList.add('active');
+            
+            // Stellt sicher, dass die Kamera auch anspringt, falls man zuerst auf ein Motiv klickt
+            if (!cameraInstance) {
+                startCamera();
+            }
+
+            // Einmaliger Hinweis beim ersten Tattoo-Klick
+            if (!hasChosenTattoo) {
+                if (hintCamera) {
+                    hintCamera.textContent = "click another one to try a different tattoo";
+                    hintCamera.classList.add('active');
+                    
+                    // Schließt die Info automatisch nach 3 Sekunden
+                    setTimeout(() => {
+                        hintCamera.classList.remove('active');
+                    }, 3000);
+                }
+                hasChosenTattoo = true;
+            } else {
+                if (hintCamera) {
+                    hintCamera.classList.remove('active');
+                }
             }
         };
         
