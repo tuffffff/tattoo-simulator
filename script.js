@@ -161,11 +161,7 @@ if (gallery) {
         img.onclick = (e) => {
             selectedTattooImage = e.target;
             
-            // Stellt sicher, dass die Kamera auch anspringt, falls man zuerst auf ein Motiv klickt
-            if (!cameraInstance) {
-                startCamera();
-            }
-
+        
             // Einmaliger Hinweis beim ersten Tattoo-Klick
             if (!hasChosenTattoo) {
                 if (hintCamera) {
