@@ -313,6 +313,7 @@ nav a:active {
     height: 100vh;
     object-fit: cover;
     z-index: 5;
+    pointer-events: none; /* Verhindert, dass die Kamera Klicks oder Berechtigungs-Triggers blockiert */
 }
 
 .camera-feed.active {
