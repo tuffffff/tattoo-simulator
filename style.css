@@ -362,7 +362,7 @@ nav a:active {
     }
 
     .sidebar-feed img {
-        max-height: 3rem !important; /* Skaliert die Flashes passend fürs Handy */
+        max-height: 5rem !important; /* Skaliert die Flashes passend fürs Handy */
     }
 
     /* 3. HINT-BOXEN POPUP (UNTEREINANDER STATT NEBENEINANDER) */
