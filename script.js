@@ -176,22 +176,24 @@ if (gallery) {
         img.onclick = (e) => {
             selectedTattooImage = e.target;
             
-        
-            // Einmaliger Hinweis beim ersten Tattoo-Klick
-            if (!hasChosenTattoo) {
-                if (hintCamera) {
-                    hintCamera.textContent = "click another one to try a different tattoo";
-                    hintCamera.classList.add('active');
-                    
-                    // Schließt die Info automatisch nach 3 Sekunden
-                    setTimeout(() => {
+            // WICHTIG: Hintbox NUR anpassen, wenn die Kamera tatsächlich aktiv läuft!
+            if (cameraInstance) {
+                if (!hasChosenTattoo) {
+                    if (hintCamera) {
+                        hintCamera.textContent = "click another one to try a different tattoo";
+                        hintCamera.classList.add('active');
+                        
+                        // Nach 3 Sekunden automatisch ausblenden
+                        setTimeout(() => {
+                            hintCamera.classList.remove('active');
+                        }, 3000);
+                    }
+                    hasChosenTattoo = true;
+                } else {
+                    // Ab dem 2. Tattoo: Hintbox direkt schließen, falls sie noch offen war
+                    if (hintCamera) {
                         hintCamera.classList.remove('active');
-                    }, 3000);
-                }
-                hasChosenTattoo = true;
-            } else {
-                if (hintCamera) {
-                    hintCamera.classList.remove('active');
+                    }
                 }
             }
         };
