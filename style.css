@@ -382,18 +382,21 @@ nav a:active {
         align-items: center !important;
         justify-content: center !important;
         gap: 1rem !important;
-        text-align: left;
     }
 
-    .hint-profile-img {
-        width: 80px !important;
-        height: auto !important;
+   /* Das Profilbild schön mittig */
+    .hint-about .hint-profile-img {
+    display: block !important;
+    margin: 0 auto !important;
     }
 
-    .hint-text {
-        width: 100% !important;
-        max-width: 100% !important;
-        font-size: 0.8rem !important;
+    /* Der Textblock: Als Block zentriert, aber der Text darin bleibt linksbündig */
+    .hint-about .hint-text {
+    width: 100% !important;
+    max-width: 280px !important;         /* Steuert, wie breit der Textblock maximal ist */
+    margin: 0 auto !important;            /* Zentriert die Textbox als Ganzes */
+    text-align: left !important;          /* Hält die Schrift schön linksbündig */
+    display: block !important;
     }
 
     /* 4. KAMERA FEED */
