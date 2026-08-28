@@ -29,13 +29,14 @@ faceMesh.setOptions({
 
 faceMesh.onResults(onResults);
 
-// 4. Funktion zum Starten der Kamera
+// 4. Funktion zum Starten der Kamera (mit Spiegelung)
 async function startCamera() {
     if (cameraInstance) return;
 
     try {
         cameraInstance = new Camera(videoElement, {
             onFrame: async () => {
+                // Sende das gespiegelte Videobild an FaceMesh
                 await faceMesh.send({ image: videoElement });
             },
             width: 1280,

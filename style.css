@@ -314,6 +314,9 @@ nav a:active {
     object-fit: cover;
     z-index: 5;
     pointer-events: none; /* Verhindert, dass die Kamera Klicks oder Berechtigungs-Triggers blockiert */
+
+    /* SPIEGELT DAS LIVEBILD WIE BEI SNAPCHAT */
+    transform: scaleX(-1);
 }
 
 .camera-feed.active {
