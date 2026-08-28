@@ -120,27 +120,42 @@ if (navImprint) {
     }
 });
 
-// 8. Zeichne-Schleife für Gesichtstracking
+// 8. Zeichne-Schleife für Gesichtstracking (Motiv wird ent-spiegelt)
 function onResults(results) {
     const ctx = overlayCanvas.getContext('2d');
     ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
     if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
         const landmarks = results.multiFaceLandmarks[0];
-        const cheek = landmarks[280]; // Punkt 280 = Linker Wangenknochen (vorher 50)
+        
+        // Da das Bild gespiegelt ist, nutzen wir für den optisch linken Wangenknochen Punkt 280
+        const cheek = landmarks[280];
 
         if (cheek) {
             const x = cheek.x * overlayCanvas.width;
             const y = cheek.y * overlayCanvas.height;
             const size = 90;
 
+            // Canvas-Kontext kurz isolieren
+            ctx.save();
+            
+            // 1. Koordinatensystem zum Mittelpunkt des Tattoos verschieben
+            ctx.translate(x, y);
+            
+            // 2. Das Tattoo lokal spiegeln (macht die globale Canvas-Spiegelung für das Motiv rückgängig)
+            ctx.scale(-1, 1);
+            
+            // 3. Bild zentriert an Position (0,0) zeichnen
             ctx.drawImage(
                 selectedTattooImage, 
-                x - (size / 2), 
-                y - (size / 2), 
+                -(size / 2), 
+                -(size / 2), 
                 size, 
                 size
             );
+            
+            // Canvas-Kontext wieder zurücksetzen
+            ctx.restore();
         }
     }
 }
