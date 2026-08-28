@@ -380,9 +380,9 @@ nav a:active {
     .hint-about {
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: flex-start !important;
+        justify-content: center !important;
         gap: 1rem !important;
-        text-align: center;
+        text-align: left;
     }
 
     .hint-profile-img {
