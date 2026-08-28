@@ -219,8 +219,7 @@ nav a:active {
     height: auto;                 /* Erstreckt sich von top bis bottom */
     
     font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
     padding: 3rem;
     box-sizing: border-box;
     color: #000000;
@@ -256,7 +255,7 @@ nav a:active {
                 0 0 50px 0 #BDCEF8;
 }
 
-/* 2. HINT ABOUT (mit Hochformat-Bild) */
+/*  HINT ABOUT (mit Hochformat-Bild) */
 .hint-about {
     background-color: rgba(209, 194, 230, 0.9);
     box-shadow: 0 0 10px 0 #D1C2E6,
@@ -266,32 +265,38 @@ nav a:active {
     
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 2.5rem;
 }
 
 .hint-profile-img {
-    width: 240px;
-    height: 330px;
+    width: auto;
+    height: 200px;
     object-fit: cover;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     flex-shrink: 0;
 }
 
 .hint-text {
     max-width: 500px;
-    font-size: 0.95rem;
     line-height: 1.5;
 }
 
-/* 3. HINT IMPRINT */
+/*  HINT IMPRINT */
 .hint-imprint {
     background-color: rgba(240, 230, 194, 0.9);
     box-shadow: 0 0 10px 0 #F0E6C2,
                 0 0 20px 0 #F0E6C2, 
                 0 0 35px 0 #F0E6C2,
                 0 0 50px 0 #F0E6C2;
+}
+
+
+/*. HINT IMPRINT */
+.hint-imprint {
+    text-align: center;
+
 }
 
 /*------------------------------ KAMERA LIVEBILD ---------------------------*/
