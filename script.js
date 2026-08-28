@@ -126,7 +126,7 @@ function onResults(results) {
 
     if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
         const landmarks = results.multiFaceLandmarks[0];
-        const cheek = landmarks[50]; // Punkt 50 = Rechter Wangenknochen
+        const cheek = landmarks[280]; // Punkt 280 = Linker Wangenknochen (vorher 50)
 
         if (cheek) {
             const x = cheek.x * overlayCanvas.width;
