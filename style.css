@@ -157,7 +157,7 @@ nav {
 
 nav a {
     font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     display: inline-block;
     width: fit-content;
     padding: 0.2rem 0.2rem;
@@ -219,7 +219,7 @@ nav a:active {
     height: auto;                 /* Erstreckt sich von top bis bottom */
     
     font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     padding: 2rem 3rem;
     box-sizing: border-box;
     color: #000000;
