@@ -79,7 +79,7 @@ if (navCamera) {
         startCamera();
         
         if (hintCamera && !hasChosenTattoo) {
-            hintCamera.textContent = "see a tattoo you like? Click it in the gallery to try it on!";
+            hintCamera.textContent = "see a tattoo you like? click it in the gallery to try it on!";
             hintCamera.classList.add('active');
         }
     });
