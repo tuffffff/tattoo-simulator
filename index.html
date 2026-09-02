@@ -14,44 +14,50 @@
 
 <!--------------- NAVIGATION -------------------->
 <nav>
-    <a class="menu menu-hexelil">HEXELIL.STICHT</a>
-    <a href="https://www.instagram.com/hexelil.sticht/" target="_blank" class="menu menu-booking">BOOKING</a>
-    <a href="#about" id="nav-about" class="menu menu-about">ABOUT</a>
-    <a href="#camera" id="nav-camera" class="menu menu-camera">CAMERA</a>
+    <a href="https://www.instagram.com/hexelil.sticht/" target="_blank" class="menu menu-hexelil">HEXELIL.STICHT</a>
+    <a href="#about" id="nav-about" class="menu menu-about">?</a>
     <a href="#imprint" id="nav-imprint" class="menu menu-imprint">IMPRINT</a> 
 </nav>
+
+<!--------------- START CAMERA BUTTON (MITTE) -------------------->
+<button id="start-cam-btn" class="center-cam-btn">START CAMERA TO TRY TATTOO</button>
 
 <!--------------- KAMERA & CANVAS -------------------->
 <video id="webcam" autoplay playsinline class="camera-feed"></video>
 <canvas id="tattoo-overlay" class="camera-feed"></canvas>
 
-<!--------------- HINT-BOXEN -------------------->
+<!--------------- HINT-BOXEN / POP-UPS -------------------->
 <div id="hint-camera" class="hint-box hint-camera">
-    click camera to start the tattoo simulator
+    <button class="close-btn">&times;</button>
+    <span id="hint-camera-text">see a tattoo you like? click it in the gallery to try it on!</span>
 </div>
-
 
 <div id="hint-about" class="hint-box hint-about">
-    <img src="assets/lilly /lilly-01.JPG" alt="Lilly" class="hint-profile-img">
-    <span class="hint-text">
-    Lilly Günther (*in Herzgebirge) is a tattoo artist and illustrator based in Bremen. Her work is deeply rooted in drawing and capturing daily life, which serves as the continuous foundation for her ideas.
-
-    She creates a welcoming safe space where you can feel entirely at ease while getting tattooed. Her signature style revolves around unique freehand tattoos, crafted directly on your skin on the day of your appointment. Alongside her custom work, she regularly draws fresh flashes derived from her ongoing illustration practice.    </span>
+    <button class="close-btn">&times;</button>
+    <div class="popup-content-about">
+        <img src="assets/lilly /lilly-01.JPG" alt="Lilly" class="hint-profile-img">
+        <span class="hint-text">
+            Lilly Günther (*in Herzgebirge) is a tattoo artist and illustrator based in Bremen. Her work is deeply rooted in drawing and capturing daily life, which serves as the continuous foundation for her ideas.
+            <br><br>
+            She creates a welcoming safe space where you can feel entirely at ease while getting tattooed. Her signature style revolves around unique freehand tattoos, crafted directly on your skin on the day of your appointment. Alongside her custom work, she regularly draws fresh flashes derived from her ongoing illustration practice.
+        </span>
+    </div>
 </div>
-
 
 <div id="hint-imprint" class="hint-box hint-imprint">
-    Lilly Günther
-    <br>Neuer Markt 14
-    <br>28199 Bremen
-    <br>h3xelil13@gmail.com
-    
+    <button class="close-btn">&times;</button>
+    <div class="popup-content">
+        Lilly Günther<br>
+        Neuer Markt 14<br>
+        28199 Bremen<br>
+        h3xelil13@gmail.com
+    </div>
 </div>
 
-<!--------------- GALERIE SIDEBAR -------------------->
+<!--------------- GALERIE BOTTOMBAR -------------------->
 <aside class="gallery-sidebar">
     <div id="tattoo-canvas" class="sidebar-feed">
-        <!-- Hier werden die 91 Flashes per JS geladen -->
+        <!-- Hier werden die Flashes per JS geladen -->
     </div>
 </aside>
 

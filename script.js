@@ -4,11 +4,12 @@ let cameraInstance = null;
 let hasChosenTattoo = false;
 
 // 2. Elemente aus dem DOM holen
-const navCamera = document.getElementById('nav-camera');
+const startCamBtn = document.getElementById('start-cam-btn');
 const navAbout = document.getElementById('nav-about');
 const navImprint = document.getElementById('nav-imprint');
 
 const hintCamera = document.getElementById('hint-camera');
+const hintCameraText = document.getElementById('hint-camera-text');
 const hintAbout = document.getElementById('hint-about');
 const hintImprint = document.getElementById('hint-imprint');
 
@@ -29,14 +30,13 @@ faceMesh.setOptions({
 
 faceMesh.onResults(onResults);
 
-// 4. Funktion zum Starten der Kamera (mit Spiegelung)
+// 4. Funktion zum Starten der Kamera
 async function startCamera() {
     if (cameraInstance) return;
 
     try {
         cameraInstance = new Camera(videoElement, {
             onFrame: async () => {
-                // Sende das gespiegelte Videobild an FaceMesh
                 await faceMesh.send({ image: videoElement });
             },
             width: 1280,
@@ -52,49 +52,41 @@ async function startCamera() {
 
         videoElement.classList.add('active');
         overlayCanvas.classList.add('active');
+        
+        // Start-Button mittig ausblenden
+        if (startCamBtn) startCamBtn.classList.add('hidden');
+        
     } catch (error) {
         console.error("Kamera-Fehler:", error);
     }
 }
 
-// Hilfsfunktion: Schließt alle offenen Hint-Boxen
+// Hilfsfunktion: Schließt alle offenen Pop-ups
 function hideAllHints() {
-    if (hintCamera) hintCamera.classList.remove('active');
-    if (hintAbout) hintAbout.classList.remove('active');
-    if (hintImprint) hintImprint.classList.remove('active');
+    [hintCamera, hintAbout, hintImprint].forEach(box => {
+        if (box) box.classList.remove('active');
+    });
 }
 
-// 5. Steuerung: CAMERA (Per Klick öffnen / Umschalten)
-if (navCamera) {
-    navCamera.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Wenn die Hintbox der Kamera offen ist: Schließen
-        if (hintCamera && hintCamera.classList.contains('active')) {
-            hintCamera.classList.remove('active');
-            return;
-        }
-
-        hideAllHints();
+// 5. Kamera über den Center-Button starten
+if (startCamBtn) {
+    startCamBtn.addEventListener('click', () => {
         startCamera();
-        
+        hideAllHints();
         if (hintCamera && !hasChosenTattoo) {
-            hintCamera.textContent = "see a tattoo you like? click it in the gallery to try it on!";
+            hintCameraText.textContent = "see a tattoo you like? click it in the gallery to try it on!";
             hintCamera.classList.add('active');
         }
     });
 }
 
-// 6. Steuerung: ABOUT (Toggle per Klick)
+// 6. Steuerung: ABOUT / ? (Toggle per Klick)
 if (navAbout) {
     navAbout.addEventListener('click', (e) => {
         e.preventDefault();
         const isOpen = hintAbout.classList.contains('active');
         hideAllHints();
-        
-        if (!isOpen) {
-            hintAbout.classList.add('active');
-        }
+        if (!isOpen) hintAbout.classList.add('active');
     });
 }
 
@@ -104,31 +96,26 @@ if (navImprint) {
         e.preventDefault();
         const isOpen = hintImprint.classList.contains('active');
         hideAllHints();
-        
-        if (!isOpen) {
-            hintImprint.classList.add('active');
-        }
+        if (!isOpen) hintImprint.classList.add('active');
     });
 }
 
-// Klick auf eine offene Hintbox schließt sie wieder
-[hintCamera, hintAbout, hintImprint].forEach(box => {
-    if (box) {
-        box.addEventListener('click', () => {
-            box.classList.remove('active');
-        });
-    }
+// 8. "X"-Buttons in allen Pop-ups aktivieren
+document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const parentBox = btn.closest('.hint-box');
+        if (parentBox) parentBox.classList.remove('active');
+    });
 });
 
-// 8. Zeichne-Schleife für Gesichtstracking (Motiv wird ent-spiegelt)
+// 9. Zeichne-Schleife für Face Tracking
 function onResults(results) {
     const ctx = overlayCanvas.getContext('2d');
     ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
     if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
         const landmarks = results.multiFaceLandmarks[0];
-        
-        // Da das Bild gespiegelt ist, nutzen wir für den optisch linken Wangenknochen Punkt 280
         const cheek = landmarks[280];
 
         if (cheek) {
@@ -136,31 +123,16 @@ function onResults(results) {
             const y = cheek.y * overlayCanvas.height;
             const size = 90;
 
-            // Canvas-Kontext kurz isolieren
             ctx.save();
-            
-            // 1. Koordinatensystem zum Mittelpunkt des Tattoos verschieben
             ctx.translate(x, y);
-            
-            // 2. Das Tattoo lokal spiegeln (macht die globale Canvas-Spiegelung für das Motiv rückgängig)
             ctx.scale(-1, 1);
-            
-            // 3. Bild zentriert an Position (0,0) zeichnen
-            ctx.drawImage(
-                selectedTattooImage, 
-                -(size / 2), 
-                -(size / 2), 
-                size, 
-                size
-            );
-            
-            // Canvas-Kontext wieder zurücksetzen
+            ctx.drawImage(selectedTattooImage, -(size / 2), -(size / 2), size, size);
             ctx.restore();
         }
     }
 }
 
-// 9. Galerie Sidebar-Bilder laden
+// 10. Galerie Sidebar-Bilder laden
 const gallery = document.getElementById('tattoo-canvas');
 
 if (gallery) {
@@ -176,25 +148,23 @@ if (gallery) {
         img.onclick = (e) => {
             selectedTattooImage = e.target;
             
-            // WICHTIG: Hintbox NUR anpassen, wenn die Kamera tatsächlich aktiv läuft!
-            if (cameraInstance) {
-                if (!hasChosenTattoo) {
-                    if (hintCamera) {
-                        hintCamera.textContent = "click another one to try a different tattoo";
-                        hintCamera.classList.add('active');
-                        
-                        // Nach 3 Sekunden automatisch ausblenden
-                        setTimeout(() => {
-                            hintCamera.classList.remove('active');
-                        }, 3000);
-                    }
-                    hasChosenTattoo = true;
-                } else {
-                    // Ab dem 2. Tattoo: Hintbox direkt schließen, falls sie noch offen war
-                    if (hintCamera) {
+            // Falls Kamera noch nicht läuft, bei Klick auf ein Motiv automatisch starten
+            if (!cameraInstance) {
+                startCamera();
+            }
+            
+            if (!hasChosenTattoo) {
+                if (hintCamera) {
+                    hintCameraText.textContent = "click another one to try a different tattoo";
+                    hintCamera.classList.add('active');
+                    
+                    setTimeout(() => {
                         hintCamera.classList.remove('active');
-                    }
+                    }, 3000);
                 }
+                hasChosenTattoo = true;
+            } else {
+                if (hintCamera) hintCamera.classList.remove('active');
             }
         };
         
