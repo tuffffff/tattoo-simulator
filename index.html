@@ -2,38 +2,45 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <!-- Macht die Webseite auf Smartphones gut lesbar -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lilly – Tattoo Simulator</title>
+    
+    <!-- Link zu deiner CSS-Datei -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- MediaPipe Bibliotheken für Face Tracking -->
+    <!-- Externe Bibliotheken für die Kamera und das Gesichtstracking (JS) -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<!--------------- NAVIGATION -------------------->
+<!-- NAVIGATIONSLEISTE: Sitzt oben am Bildschirmrand -->
 <nav>
+    <!-- Linker Instagram-Button -->
     <a href="https://www.instagram.com/hexelil.sticht/" target="_blank" class="menu menu-hexelil">HEXELIL.STICHT</a>
+    
+    <!-- Container für die zwei rechten Buttons -->
     <div class="nav-right">
         <a href="#about" id="nav-about" class="menu menu-about">?</a>
         <a href="#imprint" id="nav-imprint" class="menu menu-imprint">IMPRINT</a> 
     </div>
 </nav>
 
-<!--------------- START CAMERA BUTTON (MITTE) -------------------->
+<!-- START-BUTTON: Hauptbutton in der Mitte des Bildschirms -->
 <button id="start-cam-btn" class="center-cam-btn">START CAMERA TO TRY TATTOO</button>
 
-<!--------------- KAMERA & CANVAS -------------------->
+<!-- KAMERA & DRAWING AREA: Werden per Javascript gesteuert -->
 <video id="webcam" autoplay playsinline class="camera-feed"></video>
 <canvas id="tattoo-overlay" class="camera-feed"></canvas>
 
-<!--------------- HINT-BOXEN / POP-UPS -------------------->
+<!-- POP-UP BOX 1: Kamera-Hinweis -->
 <div id="hint-camera" class="hint-box hint-camera">
     <button class="close-btn">&times;</button>
     <span id="hint-camera-text">see a tattoo you like? click it in the gallery to try it on!</span>
 </div>
 
+<!-- POP-UP BOX 2: About / Infos über Lilly -->
 <div id="hint-about" class="hint-box hint-about">
     <button class="close-btn">&times;</button>
     <div class="popup-content-about">
@@ -45,6 +52,7 @@
     </div>
 </div>
 
+<!-- POP-UP BOX 3: Impressum -->
 <div id="hint-imprint" class="hint-box hint-imprint">
     <button class="close-btn">&times;</button>
     <div class="popup-content">
@@ -55,14 +63,13 @@
     </div>
 </div>
 
-<!--------------- GALERIE BOTTOMBAR -------------------->
+<!-- GALERIE-LEISTE UNTEN: "aside" steht für eine Randleiste -->
 <aside class="gallery-sidebar">
-    <div id="tattoo-canvas" class="sidebar-feed">
-        <!-- Hier werden die Flashes per JS geladen -->
-    </div>
+    <!-- Hier lädt Javascript automatisch deine Tattoo-Bilder rein -->
+    <div id="tattoo-canvas" class="sidebar-feed"></div>
 </aside>
 
-<!--------------- EINBETTUNG JS -------------------->
+<!-- Einbindung deiner Javascript-Datei ganz am Ende -->
 <script src="script.js"></script>
 
 </body>

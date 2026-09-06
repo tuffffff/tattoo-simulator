@@ -1,30 +1,40 @@
-/*------------------------------ SCHRIFTEN EINBETTEN ---------------------------*/
+/* ==========================================================================
+   1. SCHRIFTEN EINBINDEN
+   ========================================================================== */
 @font-face {
     font-family: 'AlteHaasGrotesk';
     src: url('fonts/alte_haas_grotesk/AlteHaasGroteskRegular.ttf') format('truetype');
     font-weight: 400;
-    font-style: normal;
 }
 
 @font-face {
     font-family: 'AlteHaasGrotesk';
     src: url('fonts/alte_haas_grotesk/AlteHaasGroteskBold.ttf') format('truetype');
     font-weight: 700;
-    font-style: normal;
 }
 
-/*------------------------------ BODY ---------------------------*/
+/* ==========================================================================
+   2. GLOBALER RESET & BASICS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    font-family: 'AlteHaasGrotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    font-family: 'AlteHaasGrotesk', sans-serif;
     background-color: #ffffff;
 }
 
-/*------------------------------ NAVIGATION ---------------------------*/
+/* ==========================================================================
+   3. NAVIGATION (OBEN)
+   ========================================================================== */
 nav {
     position: fixed;
     top: 0;
@@ -32,64 +42,59 @@ nav {
     right: 0;
     z-index: 30;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-
 }
-    
-
 
 .nav-right {
     display: flex;
-    flex-direction: row;
+    gap: 0;
 }
 
+/* Basiseigenschaften aller Nav-Buttons */
 nav a {
-    font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
     text-decoration: none;
     color: #000000;
-    padding: 0.3rem 0.5rem;
-    border-radius: 5px; 
-    box-sizing: border-box;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Neue Hintergrundfarben aus deinem Bild */
+.menu-hexelil { background-color: #EBCBE3; } /* Rosa */
+.menu-about { 
+    background-color: #BCC86F; /* Grün (ehemals Lila) */
+    width: 32px; 
+    height: 32px; 
+    padding: 0; 
+}
+.menu-imprint { background-color: #A19E67; } /* Gelb/Grasgrün */
+
+/* HOVER-EFFEKT: Passender Schatten in der neuen Farbe */
+.menu-hexelil:hover { 
+    box-shadow: 0 4px 10px rgba(235, 203, 227, 0.6); 
+    transform: scale(0.96); 
+}
+.menu-about:hover { 
+    box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); 
+    transform: scale(0.96); 
+}
+.menu-imprint:hover { 
+    box-shadow: 0 4px 10px rgba(161, 158, 103, 0.6); 
+    transform: scale(0.96); 
 }
 
 nav a:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
-/* Nav-Farben & Galerie-Glow auf Hover */
-.menu-hexelil {
-    background-color: #F0CCE2;
-}
-.menu-hexelil:hover {
-    box-shadow: 0 2px 8px rgba(240, 204, 226, 0.8);
-    transform: scale(0.95);
-}
-
-.menu-about {
-    background-color: #D1C2E6;
-}
-.menu-about:hover {
-    box-shadow: 0 2px 8px rgba(209, 194, 230, 0.8);
-    transform: scale(0.95);
-}
-
-.menu-imprint {
-    background-color: #F0E6C2;
-}
-.menu-imprint:hover {
-    box-shadow: 0 2px 8px rgba(240, 230, 194, 0.8);
-    transform: scale(0.95);
-}
-
-/*------------------------------ START CAMERA BUTTON (MITTE) ---------------------------*/
+/* ==========================================================================
+   4. KAMERA-BUTTON (MITTE)
+   ========================================================================== */
 .center-cam-btn {
     position: fixed;
     top: 45%;
@@ -97,23 +102,20 @@ nav a:active {
     transform: translate(-50%, -50%);
     z-index: 25;
     
-    font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
     color: #000000;
-    background-color: #BDCEF8;
+    background-color: #C7D5F3; /* Neue blaue Farbe */
     border: none;
-    border-radius: 5px; /* Einheitlich wie der Rest */
-    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
     
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
 }
 
-/* Identischer Hover-Effekt wie bei den Galerie-Flashes */
 .center-cam-btn:hover {
-    box-shadow: 0 2px 8px rgba(189, 206, 248, 0.8);
-    transform: translate(-50%, -50%) scale(0.95);
+    transform: translate(-50%, -50%) scale(0.96);
+    box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6);
 }
 
 .center-cam-btn.hidden {
@@ -121,32 +123,28 @@ nav a:active {
     pointer-events: none;
 }
 
-/*------------------------------ HINT-BOXEN / POP-UPS ---------------------------*/
+/* ==========================================================================
+   5. POP-UPS / HINT-BOXEN
+   ========================================================================== */
 .hint-box {
     position: fixed;
-    top: 2.2rem;
+    top: 2.3rem;
     right: 0;
-    transform: none;
     
     width: 320px;
     max-width: 90vw;
-    height: auto;
-    max-height: 80vh;
-    
-    font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    padding: 1rem; 
-    box-sizing: border-box;
+    padding: 1rem;
     color: #000000;
     
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: none;
+    
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
     z-index: 40;
     
     display: flex;
@@ -156,25 +154,40 @@ nav a:active {
 .hint-box.active {
     opacity: 1;
     pointer-events: auto;
-    transform: none;
 }
 
+/* Leichter Schatten nur für aktive Pop-ups beim Drüberfahren */
+.hint-about.active:hover { box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
+.hint-imprint.active:hover { box-shadow: 0 4px 10px rgba(161, 158, 103, 0.6); }
+.hint-camera.active:hover { box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
+
+/* Das Schließen-X oben rechts */
 .close-btn {
     position: absolute;
     top: 6px;
     right: 8px;
     background: none;
     border: none;
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 0.9rem;
     cursor: pointer;
     color: #000000;
-    line-height: 1;
     padding: 2px;
 }
 
 .close-btn:hover {
-    opacity: 0.6;
+    opacity: 0.5;
+}
+
+/* Pop-up Farben & Positionen */
+.hint-about {
+    right: 3.8rem;
+    background-color: rgba(188, 200, 111, 0.95); /* Grün */
+}
+
+.hint-imprint {
+    right: 0;
+    background-color: rgba(161, 158, 103, 0.95); /* Gelb/Grasgrün */
+    text-align: left;
 }
 
 .hint-camera {
@@ -182,41 +195,18 @@ nav a:active {
     left: 50%;
     right: auto;
     transform: translate(-50%, -50%);
-    background-color: rgba(189, 206, 248, 0.95); 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: rgba(199, 213, 243, 0.95); /* Blau */
     text-align: center;
-}
-
-.hint-camera.active {
-    transform: translate(-50%, -50%);
-}
-
-.hint-about {
-    right: 3.8rem;
-    background-color: rgba(209, 194, 230, 0.95);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.popup-content-about {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
 }
 
 .hint-text {
     line-height: 1.35;
     text-align: left;
-    font-weight: 400;
 }
 
-.hint-imprint {
-    right: 0;
-    background-color: rgba(240, 230, 194, 0.95);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    text-align: left;
-}
-
-/*------------------------------ GALLERY BOTTOMBAR ---------------------------*/
+/* ==========================================================================
+   6. GALERIE UNTEN
+   ========================================================================== */
 .gallery-sidebar {
     position: fixed;
     bottom: 0;
@@ -226,7 +216,6 @@ nav a:active {
     overflow-x: auto;
     overflow-y: hidden;
     z-index: 15;
-    box-sizing: border-box;
     scrollbar-width: none;
     padding: 15px 10px;      
 }
@@ -243,47 +232,31 @@ nav a:active {
     align-items: flex-end;
 }
 
+/* Jedes Tattoo-Bild in der Galerie */
 .sidebar-feed img {
     max-height: 12rem;       
     width: auto;
-    height: auto;
     flex-shrink: 0;
-    display: block;
-    box-sizing: border-box;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 8px;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .sidebar-feed img:hover {
-    transform: scale(0.95);
-    transform-origin: bottom center;
+    transform: scale(0.96);
     z-index: 20;
 }
 
-/* Glow Layers für Galerie */
-.sidebar-feed img:nth-child(5n+1):hover { 
-    background-color: #F0CCE2; 
-    box-shadow: 0 2px 8px rgba(240, 204, 226, 0.8);
-}
-.sidebar-feed img:nth-child(5n+2):hover { 
-    background-color: #A0995D; 
-    box-shadow: 0 2px 8px rgba(160, 153, 93, 0.8);
-}
-.sidebar-feed img:nth-child(5n+3):hover { 
-    background-color: #D1C2E6; 
-    box-shadow: 0 2px 8px rgba(209, 194, 230, 0.8);
-}
-.sidebar-feed img:nth-child(5n+4):hover { 
-    background-color: #BDCEF8; 
-    box-shadow: 0 2px 8px rgba(189, 206, 248, 0.8);
-}
-.sidebar-feed img:nth-child(5n+5):hover { 
-    background-color: #F0E6C2; 
-    box-shadow: 0 2px 8px rgba(240, 230, 194, 0.8);
-}
+/* Abwechselnder Hover-Hintergrund in deinen neuen harmonischen Farben */
+.sidebar-feed img:nth-child(4n+1):hover { background-color: #EBCBE3; box-shadow: 0 4px 10px rgba(235, 203, 227, 0.6); }
+.sidebar-feed img:nth-child(4n+2):hover { background-color: #BCC86F; box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
+.sidebar-feed img:nth-child(4n+3):hover { background-color: #C7D5F3; box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
+.sidebar-feed img:nth-child(4n+4):hover { background-color: #A19E67; box-shadow: 0 4px 10px rgba(161, 158, 103, 0.6); }
 
-/*------------------------------ KAMERA LIVEBILD ---------------------------*/
+/* ==========================================================================
+   7. KAMERA LIVEBILD
+   ========================================================================== */
 .camera-feed {
     display: none;
     position: absolute;
@@ -301,17 +274,12 @@ nav a:active {
     display: block;
 }
 
-/*------------------------------ MOBILE RESPONSIVE ---------------------------*/
+/* ==========================================================================
+   8. SMARTPHONE-ANPASSUNGEN
+   ========================================================================== */
 @media (max-width: 768px) {
-    nav a {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.6rem;
-    }
-
     .center-cam-btn {
         width: 80vw;
-        font-size: 0.85rem;
-        padding: 0.8rem 1rem;
         text-align: center;
     }
 
