@@ -107,14 +107,15 @@ if (startCamBtn) {
     startCamBtn.addEventListener('click', () => {
         startCamera();
         hideAllHints();
+        
+        // Öffnet das Pop-up mit Text 1 (steht bereits im HTML)
         if (hintCamera && !hasChosenTattoo) {
-            hintCameraText.textContent = "see a tattoo you like? click it in the gallery to try it on!";
             hintCamera.classList.add('active');
         }
     });
 }
 
-// Nav-Button: ABOUT / ? (Öffnet NUR noch, schließt nicht mehr per Klick)
+// Nav-Button: ABOUT / ?
 if (navAbout) {
     navAbout.addEventListener('click', (e) => {
         e.preventDefault();
@@ -123,7 +124,7 @@ if (navAbout) {
     });
 }
 
-// Nav-Button: IMPRINT (Öffnet NUR noch, schließt nicht mehr per Klick)
+// Nav-Button: IMPRINT
 if (navImprint) {
     navImprint.addEventListener('click', (e) => {
         e.preventDefault();
@@ -132,7 +133,7 @@ if (navImprint) {
     });
 }
 
-// Das "X" in allen Pop-ups (Einziger Weg zum Schließen)
+// Das "X" in allen Pop-ups (Schließt das jeweilige Fenster)
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -142,8 +143,11 @@ document.querySelectorAll('.close-btn').forEach(btn => {
 });
 
 // ==========================================================================
-// 5. GALERIE-BILDER GENERIEREN
+// 5. GALERIE-BILDER GENERIEREN & LOGIK
 // ==========================================================================
+const msg1 = document.getElementById('hint-msg-1');
+const msg2 = document.getElementById('hint-msg-2');
+
 if (gallery) {
     gallery.innerHTML = '';
 
@@ -154,19 +158,24 @@ if (gallery) {
         img.src = `assets/png/Motiv-${number}.png`; 
         img.className = 'sidebar-flash';
         
-        img.onclick = (e) => {
+       img.onclick = (e) => {
             selectedTattooImage = e.target;
             
-            // Kamera automatisch starten, falls noch aus
+            // Kamera automatisch starten, falls sie noch aus ist
             if (!cameraInstance) {
                 startCamera();
             }
             
+            // Logik für den Kamera-Hinweis
             if (!hasChosenTattoo) {
                 if (hintCamera) {
-                    hintCameraText.textContent = "click another one to try a different tattoo";
+                    // Blendet Text 1 aus und Text 2 ein (über CSS-Klassen)
+                    if (msg1) msg1.classList.add('hidden');
+                    if (msg2) msg2.classList.remove('hidden');
+                    
                     hintCamera.classList.add('active');
                     
+                    // Versteckt das Pop-up nach 3 Sekunden automatisch
                     setTimeout(() => {
                         hintCamera.classList.remove('active');
                     }, 3000);
@@ -180,3 +189,4 @@ if (gallery) {
         gallery.appendChild(img);
     }
 }
+

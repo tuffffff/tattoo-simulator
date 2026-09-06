@@ -34,10 +34,19 @@
 <video id="webcam" autoplay playsinline class="camera-feed"></video>
 <canvas id="tattoo-overlay" class="camera-feed"></canvas>
 
-<!-- POP-UP BOX 1: Kamera-Hinweis -->
+<!-- POP-UP BOX 1: Kamera-Hinweise -->
 <div id="hint-camera" class="hint-box hint-camera">
     <button class="close-btn">&times;</button>
-    <span id="hint-camera-text">see a tattoo you like? click it in the gallery to try it on!</span>
+    
+    <!-- Text 1: Standardmäßig sichtbar -->
+    <p id="hint-msg-1" class="hint-text text-center">
+        see a tattoo you like? click it in the gallery to try it on!
+    </p>
+
+    <!-- Text 2: Per CSS-Klasse versteckt -->
+    <p id="hint-msg-2" class="hint-text text-center hidden">
+        click another one to try a different tattoo
+    </p>
 </div>
 
 <!-- POP-UP BOX 2: About / Infos über Lilly -->
