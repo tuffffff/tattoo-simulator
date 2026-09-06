@@ -128,12 +128,12 @@ nav a:active {
    ========================================================================== */
 .hint-box {
     position: fixed;
-    top: 2.3rem;
-    right: 0;
+    top: 2.8rem; /* Sitzt mit etwas Abstand unter den Nav-Buttons */
+    right: 0;   /* Bündig am rechten Bildschirmrand */
     
-    width: 320px;
-    max-width: 90vw;
-    padding: 1rem;
+    width: auto;
+    max-width: 20rem;
+    padding: 1.8rem 1.2rem 1.2rem 1.2rem; /* Platz oben für das Schließen-X */
     color: #000000;
     
     border-radius: 8px;
@@ -156,40 +156,43 @@ nav a:active {
     pointer-events: auto;
 }
 
-/* Leichter Schatten nur für aktive Pop-ups beim Drüberfahren */
-.hint-about.active:hover { box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
+/* Schatten-Effekte beim Drüberfahren */
+.hint-about.active:hover  { box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
 .hint-imprint.active:hover { box-shadow: 0 4px 10px rgba(161, 158, 103, 0.6); }
-.hint-camera.active:hover { box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
+.hint-camera.active:hover  { box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
 
-/* Das Schließen-X oben rechts */
+/* Schließen-X freistehend oben rechts fixieren */
 .close-btn {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 8px;
+    right: 12px;
     background: none;
     border: none;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     cursor: pointer;
     color: #000000;
     padding: 2px;
+    line-height: 1;
+    z-index: 50;
 }
 
 .close-btn:hover {
     opacity: 0.5;
 }
 
-/* Pop-up Farben & Positionen */
+/* Ausrichtung & Farben der einzelnen Pop-ups */
 .hint-about {
-    right: 3.8rem;
+    right: 0; /* Sauber rechts ausgerichtet */
     background-color: rgba(188, 200, 111, 0.95); /* Grün */
 }
 
 .hint-imprint {
-    right: 0;
+    right: 0; /* Sauber rechts ausgerichtet */
     background-color: rgba(161, 158, 103, 0.95); /* Gelb/Grasgrün */
     text-align: left;
 }
 
+/* Das Kamera-Pop-up bleibt zentriert auf dem Bildschirm */
 .hint-camera {
     top: 50%;
     left: 50%;
@@ -197,6 +200,7 @@ nav a:active {
     transform: translate(-50%, -50%);
     background-color: rgba(199, 213, 243, 0.95); /* Blau */
     text-align: center;
+    padding: 1.5rem 1rem 1rem 1rem;
 }
 
 .hint-text {
