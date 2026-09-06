@@ -158,35 +158,34 @@ if (gallery) {
         img.src = `assets/png/Motiv-${number}.png`; 
         img.className = 'sidebar-flash';
         
-       img.onclick = (e) => {
+        img.onclick = (e) => {
+            // Speichert das angeklickte Tattoo-Bild
             selectedTattooImage = e.target;
             
-            // Kamera automatisch starten, falls sie noch aus ist
-            if (!cameraInstance) {
-                startCamera();
-            }
-            
-            // Logik für den Kamera-Hinweis
-            if (!hasChosenTattoo) {
-                if (hintCamera) {
-                    // Blendet Text 1 aus und Text 2 ein (über CSS-Klassen)
-                    if (msg1) msg1.classList.add('hidden');
-                    if (msg2) msg2.classList.remove('hidden');
-                    
-                    hintCamera.classList.add('active');
-                    
-                    // Versteckt das Pop-up nach 3 Sekunden automatisch
-                    setTimeout(() => {
-                        hintCamera.classList.remove('active');
-                    }, 3000);
+            // Die Logik greift NUR, wenn die Kamera bereits läuft (gestartet über den Button)
+            if (cameraInstance) {
+                if (!hasChosenTattoo) {
+                    if (hintCamera) {
+                        // Wechselt vom 1. Hinweis zum 2. Hinweis im HTML
+                        if (msg1) msg1.classList.add('hidden');
+                        if (msg2) msg2.classList.remove('hidden');
+                        
+                        hintCamera.classList.add('active');
+                        
+                        // Versteckt das Pop-up nach 3 Sekunden automatisch
+                        setTimeout(() => {
+                            hintCamera.classList.remove('active');
+                        }, 3000);
+                    }
+                    hasChosenTattoo = true;
+                } else {
+                    if (hintCamera) hintCamera.classList.remove('active');
                 }
-                hasChosenTattoo = true;
-            } else {
-                if (hintCamera) hintCamera.classList.remove('active');
             }
+            // Wenn die Kamera noch AUS ist, wird das Bild nur ausgewählt, 
+            // aber die Kamera startet NICHT von alleine!
         };
         
         gallery.appendChild(img);
     }
 }
-
