@@ -64,16 +64,12 @@ nav a {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hintergrundfarben (Vollkommen deckend) */
 .menu-hexelil { background-color: #EBCBE3; } /* Rosa */
-.menu-about { 
-    background-color: #BCC86F; /* Grün (ehemals Lila) */
-    width: 32px; 
-    height: 32px; 
-    padding: 0; 
-}
+.menu-about   { background-color: #BCC86F; } /* Grün */
 .menu-imprint { background-color: #A19E67; } /* Gelb/Grasgrün */
 
-/* HOVER-EFFEKT: Passender Schatten in der neuen Farbe */
+/* Uniformer Hover-Schatten (0 4px 10px) */
 .menu-hexelil:hover { 
     box-shadow: 0 4px 10px rgba(235, 203, 227, 0.6); 
     transform: scale(0.96); 
@@ -102,16 +98,18 @@ nav a:active {
     z-index: 25;
     
     color: #000000;
-    background-color: #C7D5F3; /* Neue blaue Farbe */
+    background-color: #C7D5F3; /* Blau */
     border: none;
     border-radius: 8px;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
     
+    padding: 0.5rem 0.8rem; 
+    
+    cursor: pointer;
     box-shadow: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
 }
 
+/* Uniformer Hover-Schatten */
 .center-cam-btn:hover {
     transform: translate(-50%, -50%) scale(0.96);
     box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6);
@@ -127,12 +125,14 @@ nav a:active {
    ========================================================================== */
 .hint-box {
     position: fixed;
-    top: 2.8rem; /* Sitzt mit etwas Abstand unter den Nav-Buttons */
-    right: 0;   /* Bündig am rechten Bildschirmrand */
+    top: 2.1rem; /* Nähert die Box direkt an die Navigationsleiste an */
+    right: 0;
     
-    width: auto;
-    max-width: 20rem;
-    padding: 1.8rem 1.2rem 1.2rem 1.2rem; /* Platz oben für das Schließen-X */
+    width: auto; /* Passt sich schmal an den Inhalt an */
+    max-width: 15rem; /* Viel kompakter als vorher */
+    
+    /* Schmaleres Padding: 1.4rem oben schützt vor dem X, ohne riesig zu wirken */
+    padding: 1.4rem 1rem 0.8rem 1rem; 
     color: #000000;
     
     border-radius: 8px;
@@ -155,19 +155,19 @@ nav a:active {
     pointer-events: auto;
 }
 
-/* Schatten-Effekte beim Drüberfahren */
-.hint-about.active:hover  { box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
+/* Uniformer Hover-Schatten */
+.hint-about.active:hover   { box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
 .hint-imprint.active:hover { box-shadow: 0 4px 10px rgba(161, 158, 103, 0.6); }
 .hint-camera.active:hover  { box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
 
-/* Schließen-X freistehend oben rechts fixieren */
+/* Schließen-X (Subtil in der Ecke verankert) */
 .close-btn {
     position: absolute;
-    top: 8px;
-    right: 12px;
+    top: 5px;
+    right: 8px;
     background: none;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     color: #000000;
     padding: 2px;
@@ -179,47 +179,36 @@ nav a:active {
     opacity: 0.5;
 }
 
-/* Ausrichtung & Farben der einzelnen Pop-ups */
+/* Einzelne Hintergründe & Positionen */
 .hint-about {
-    right: 0; /* Sauber rechts ausgerichtet */
-    background-color: rgba(188, 200, 111, 0.95); /* Grün */
+    right: 0;
+    background-color: #BCC86F; /* Grün */
 }
 
 .hint-imprint {
-    right: 0; /* Sauber rechts ausgerichtet */
-    background-color: rgba(161, 158, 103, 0.95); /* Gelb/Grasgrün */
-    text-align: left;
+    right: 0;
+    background-color: #A19E67; /* Gelb */
 }
 
-/* Das Kamera-Pop-up kompakt wie ein Button formatieren */
+/* Kamera-Meldungen: In der Bildschimmitte zentriert */
 .hint-camera {
     top: 50%;
     left: 50%;
     right: auto;
     transform: translate(-50%, -50%);
-    background-color: rgba(199, 213, 243, 0.95); /* Blau */
-    text-align: center;
-    width: auto;
-    max-width: 30rem;
-    
-
-    padding: 1.8rem 1.2rem 1.2rem 1.2rem; /* Platz oben für das Schließen-X */
-
+    background-color: #C7D5F3; /* Blau */
 }
 
-/* Entfernt ungewollte Standard-Abstände von Absätzen in Pop-ups */
 .hint-text {
-    line-height: 1.35;
+    line-height: 1.3;
     text-align: left;
-    margin: 0; /* Entfernt den großen Browser-Standardabstand */
+    margin: 0;
 }
 
-/* Speziell für den zentrierten Kamera-Text */
 .hint-camera .hint-text {
-    text-align: center;
+    text-align: left;
 }
 
-/* Hilfsklasse zum Verstecken von Elementen */
 .hidden {
     display: none !important;
 }
@@ -252,7 +241,6 @@ nav a:active {
     align-items: flex-end;
 }
 
-/* Jedes Tattoo-Bild in der Galerie */
 .sidebar-feed img {
     max-height: 12rem;       
     width: auto;
@@ -268,7 +256,7 @@ nav a:active {
     z-index: 20;
 }
 
-/* Abwechselnder Hover-Hintergrund in deinen neuen harmonischen Farben */
+/* Galerie-Schatten exakt angepasst an die Buttons (0 4px 10px) */
 .sidebar-feed img:nth-child(4n+1):hover { background-color: #EBCBE3; box-shadow: 0 4px 10px rgba(235, 203, 227, 0.6); }
 .sidebar-feed img:nth-child(4n+2):hover { background-color: #BCC86F; box-shadow: 0 4px 10px rgba(188, 200, 111, 0.6); }
 .sidebar-feed img:nth-child(4n+3):hover { background-color: #C7D5F3; box-shadow: 0 4px 10px rgba(199, 213, 243, 0.6); }
