@@ -64,7 +64,6 @@ nav a {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Neue Hintergrundfarben aus deinem Bild */
 .menu-hexelil { background-color: #EBCBE3; } /* Rosa */
 .menu-about { 
     background-color: #BCC86F; /* Grün (ehemals Lila) */
@@ -106,7 +105,7 @@ nav a:active {
     background-color: #C7D5F3; /* Neue blaue Farbe */
     border: none;
     border-radius: 8px;
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 0.8rem;
     cursor: pointer;
     
     box-shadow: none;
