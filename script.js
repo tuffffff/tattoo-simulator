@@ -1,9 +1,11 @@
-// 1. Variablen anlegen
+// ==========================================================================
+// 1. GLOBALE VARIABLEN & ELEMNETE
+// ==========================================================================
 let selectedTattooImage = null;
 let cameraInstance = null;
 let hasChosenTattoo = false;
 
-// 2. Elemente aus dem DOM holen
+// DOM-Elemente
 const startCamBtn = document.getElementById('start-cam-btn');
 const navAbout = document.getElementById('nav-about');
 const navImprint = document.getElementById('nav-imprint');
@@ -15,8 +17,21 @@ const hintImprint = document.getElementById('hint-imprint');
 
 const videoElement = document.getElementById('webcam');
 const overlayCanvas = document.getElementById('tattoo-overlay');
+const gallery = document.getElementById('tattoo-canvas');
 
-// 3. MediaPipe FaceMesh konfigurieren
+// ==========================================================================
+// 2. HILFSFUNKTIONEN
+// ==========================================================================
+// Schließt alle aktuell geöffneten Pop-ups
+function hideAllHints() {
+    [hintCamera, hintAbout, hintImprint].forEach(box => {
+        if (box) box.classList.remove('active');
+    });
+}
+
+// ==========================================================================
+// 3. MEDIAPIPE FACE MESH (GESICHTSTRACKING)
+// ==========================================================================
 const faceMesh = new FaceMesh({
     locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
 });
@@ -30,7 +45,7 @@ faceMesh.setOptions({
 
 faceMesh.onResults(onResults);
 
-// 4. Funktion zum Starten der Kamera
+// Startet die Webcam und verbindet sie mit MediaPipe
 async function startCamera() {
     if (cameraInstance) return;
 
@@ -53,7 +68,6 @@ async function startCamera() {
         videoElement.classList.add('active');
         overlayCanvas.classList.add('active');
         
-        // Start-Button mittig ausblenden
         if (startCamBtn) startCamBtn.classList.add('hidden');
         
     } catch (error) {
@@ -61,14 +75,34 @@ async function startCamera() {
     }
 }
 
-// Hilfsfunktion: Schließt alle offenen Pop-ups
-function hideAllHints() {
-    [hintCamera, hintAbout, hintImprint].forEach(box => {
-        if (box) box.classList.remove('active');
-    });
+// Zeichnet das ausgewählte Tattoo live auf die Wange
+function onResults(results) {
+    const ctx = overlayCanvas.getContext('2d');
+    ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+    if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
+        const landmarks = results.multiFaceLandmarks[0];
+        const cheek = landmarks[280]; // Orientierungspunkt Wange
+
+        if (cheek) {
+            const x = cheek.x * overlayCanvas.width;
+            const y = cheek.y * overlayCanvas.height;
+            const size = 90;
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(-1, 1); // Spiegelt das Tattoo passend zur Kamera
+            ctx.drawImage(selectedTattooImage, -(size / 2), -(size / 2), size, size);
+            ctx.restore();
+        }
+    }
 }
 
-// 5. Kamera über den Center-Button starten
+// ==========================================================================
+// 4. EVENT LISTENER (BUTTONS & POP-UPS)
+// ==========================================================================
+
+// Kamera-Start-Button in der Mitte
 if (startCamBtn) {
     startCamBtn.addEventListener('click', () => {
         startCamera();
@@ -80,27 +114,25 @@ if (startCamBtn) {
     });
 }
 
-// 6. Steuerung: ABOUT / ? (Toggle per Klick)
+// Nav-Button: ABOUT / ? (Öffnet NUR noch, schließt nicht mehr per Klick)
 if (navAbout) {
     navAbout.addEventListener('click', (e) => {
         e.preventDefault();
-        const isOpen = hintAbout.classList.contains('active');
         hideAllHints();
-        if (!isOpen) hintAbout.classList.add('active');
+        hintAbout.classList.add('active');
     });
 }
 
-// 7. Steuerung: IMPRINT (Toggle per Klick)
+// Nav-Button: IMPRINT (Öffnet NUR noch, schließt nicht mehr per Klick)
 if (navImprint) {
     navImprint.addEventListener('click', (e) => {
         e.preventDefault();
-        const isOpen = hintImprint.classList.contains('active');
         hideAllHints();
-        if (!isOpen) hintImprint.classList.add('active');
+        hintImprint.classList.add('active');
     });
 }
 
-// 8. "X"-Buttons in allen Pop-ups aktivieren
+// Das "X" in allen Pop-ups (Einziger Weg zum Schließen)
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -109,32 +141,9 @@ document.querySelectorAll('.close-btn').forEach(btn => {
     });
 });
 
-// 9. Zeichne-Schleife für Face Tracking
-function onResults(results) {
-    const ctx = overlayCanvas.getContext('2d');
-    ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-
-    if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0 && selectedTattooImage) {
-        const landmarks = results.multiFaceLandmarks[0];
-        const cheek = landmarks[280];
-
-        if (cheek) {
-            const x = cheek.x * overlayCanvas.width;
-            const y = cheek.y * overlayCanvas.height;
-            const size = 90;
-
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.scale(-1, 1);
-            ctx.drawImage(selectedTattooImage, -(size / 2), -(size / 2), size, size);
-            ctx.restore();
-        }
-    }
-}
-
-// 10. Galerie Sidebar-Bilder laden
-const gallery = document.getElementById('tattoo-canvas');
-
+// ==========================================================================
+// 5. GALERIE-BILDER GENERIEREN
+// ==========================================================================
 if (gallery) {
     gallery.innerHTML = '';
 
@@ -148,7 +157,7 @@ if (gallery) {
         img.onclick = (e) => {
             selectedTattooImage = e.target;
             
-            // Falls Kamera noch nicht läuft, bei Klick auf ein Motiv automatisch starten
+            // Kamera automatisch starten, falls noch aus
             if (!cameraInstance) {
                 startCamera();
             }
