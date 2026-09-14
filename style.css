@@ -30,6 +30,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
     background-color: #ffffff;
+    padding: 8px;
 }
 
 /* ==========================================================================
@@ -37,9 +38,6 @@ html, body {
    ========================================================================== */
 nav {
     position: fixed;
-    top: 10px;    /* Vorher 0 -> rückt die Nav nach unten */
-    left: 10px;   /* Vorher 0 -> rückt den Hexelil-Button vom linken Rand weg */
-    right: 10px;  /* Vorher 0 -> rückt die rechten Buttons vom rechten Rand weg */
     z-index: 30;
     display: flex;
     justify-content: space-between;
