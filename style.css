@@ -30,7 +30,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
     background-color: #ffffff;
-    padding: 8px;
+    
 }
 
 /* ==========================================================================
@@ -38,11 +38,15 @@ html, body {
    ========================================================================== */
 nav {
     position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 30;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
+
 .nav-right {
     display: flex;
     gap: 0;
@@ -63,7 +67,7 @@ nav a {
 
 /* Hintergrundfarben (Vollkommen deckend) */
 .menu-hexelil { background-color: #EBCBE3; } /* Rosa */
-.menu-about   { background-color: #bcc86f; } /* Grün */
+.menu-about   { background-color: #BCC86F; } /* Grün */
 .menu-imprint { background-color: #A19E67; } /* Gelb/Grasgrün */
 
 /* Uniformer Hover-Schatten (0 4px 10px) */
