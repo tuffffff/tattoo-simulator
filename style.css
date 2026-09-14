@@ -65,7 +65,7 @@ nav a {
 
 /* Hintergrundfarben (Vollkommen deckend) */
 .menu-hexelil { background-color: #EBCBE3; } /* Rosa */
-.menu-about   { background-color: #BCC86F; } /* Grün */
+.menu-about   { background-color: #bcc86f; } /* Grün */
 .menu-imprint { background-color: #A19E67; } /* Gelb/Grasgrün */
 
 /* Uniformer Hover-Schatten (0 4px 10px) */
