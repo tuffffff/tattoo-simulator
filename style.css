@@ -290,23 +290,23 @@ nav a:active {
    ========================================================================== */
 @media (max-width: 768px) {
     .center-cam-btn {
-        /* Entfernt das breite 80vw, damit er wieder schlank wird */
         width: auto; 
-        max-width: 90vw; /* Schutzgrenze, damit er nie über den Rand steht */
-        padding: 0.4rem 0.7rem; /* Leicht reduziertes Padding für Mobilgeräte */
-        font-size: 0.8rem; /* Macht auch die Schrift auf kleinen Displays etwas feiner */
+        max-width: 90vw;
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
     }
 
     .hint-box {
         width: 280px;
     }
 
+    /* Galerie bleibt auch auf schmalen Screens angemessen groß */
     .gallery-sidebar {
-        height: 7rem !important;
+        height: 10rem !important; 
         padding: 10px !important;
     }
 
     .sidebar-feed img {
-        max-height: 5.5rem !important;
+        max-height: 8.5rem !important; /* Deutlich größer als 5.5rem */
     }
 }
