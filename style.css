@@ -18,8 +18,8 @@
    ========================================================================== */
 * {
     box-sizing: border-box;
-    font-family: 'AlteHaasGrotesk', sans-serif;
-    font-size: 0.9rem;
+    font-family: neue haask, sans-serif;
+    font-size: 0.95rem;
     font-weight: bold;
 }
 
@@ -55,7 +55,7 @@ nav {
 nav a {
     text-decoration: none;
     color: #000000;
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
@@ -100,9 +100,8 @@ nav a:active {
     color: #000000;
     background-color: #C7D5F3; /* Blau */
     border: none;
+    padding: 0.4rem 0.6rem;
     border-radius: 8px;
-    
-    padding: 0.5rem 0.8rem; 
     
     cursor: pointer;
     box-shadow: none;
@@ -127,7 +126,7 @@ nav a:active {
    ========================================================================== */
 .hint-box {
     position: fixed;
-    top: 2.1rem; /* Nähert die Box direkt an die Navigationsleiste an */
+    top: 1.91rem; /* Nähert die Box direkt an die Navigationsleiste an */
     right: 0;
     
     width: auto; /* Passt sich schmal an den Inhalt an */
