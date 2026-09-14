@@ -282,13 +282,17 @@ nav a:active {
     display: block;
 }
 
+
 /* ==========================================================================
    8. SMARTPHONE-ANPASSUNGEN
    ========================================================================== */
 @media (max-width: 768px) {
     .center-cam-btn {
-        width: 80vw;
-        text-align: center;
+        /* Entfernt das breite 80vw, damit er wieder schlank wird */
+        width: auto; 
+        max-width: 90vw; /* Schutzgrenze, damit er nie über den Rand steht */
+        padding: 0.4rem 0.7rem; /* Leicht reduziertes Padding für Mobilgeräte */
+        font-size: 0.8rem; /* Macht auch die Schrift auf kleinen Displays etwas feiner */
     }
 
     .hint-box {
