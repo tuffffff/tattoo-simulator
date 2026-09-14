@@ -30,7 +30,6 @@ html, body {
     height: 100vh;
     overflow: hidden;
     background-color: #ffffff;
-    padding: 8px; /* Hier die gewünschte Randbreite anpassen */
 }
 
 /* ==========================================================================
